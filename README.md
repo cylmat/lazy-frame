@@ -4,10 +4,4 @@ insertion de données
 
 et voila
 
-bref
-
-dsfg
-
-hfgsghfhghgshgfhsgfsh
-
-bla
+merci ma puce
