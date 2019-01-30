@@ -1,4 +1,5 @@
 /nbproject/
 *
+/wp*
 !README.md
 !/myapp_wp
