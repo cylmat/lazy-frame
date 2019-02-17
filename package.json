@@ -1,0 +1,29 @@
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "coffeescript": "^2.3.2",
+    "grunt": "^1.0.3",
+    "gulp": "^4.0.0",
+    "less": "^3.9.0",
+    "underscore": "^1.9.1"
+  },
+  "name": "wordpress",
+  "description": "wordpress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeonisland/wordpress.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/freeonisland/wordpress/issues"
+  },
+  "homepage": "https://github.com/freeonisland/wordpress#readme"
+}
