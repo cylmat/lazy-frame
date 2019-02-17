@@ -1,3 +1,7 @@
-*
-!/myapp_wp
-!/wp_content/themes/bulk-child
+!/myapp_wp/
+!/wp_content/themes/bulk-child/
+!/package*
+/node_modules
+/wp-*
+/nbproject
+.htaccess
