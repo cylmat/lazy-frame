@@ -1,5 +1,6 @@
-/nbproject/
 *
+/nbproject/
 /wp*
-!README.md
 !/myapp_wp
+!/wp-content/themes/bulk-child/
+!tests
