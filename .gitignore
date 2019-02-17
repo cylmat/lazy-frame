@@ -1,0 +1,19 @@
+# node
+/node_modules
+
+# wordpress except theme
+/wp-*
+!/wp-content/themes/bulk-child/
+
+# project
+/nbproject
+
+# htaccess
+.htaccess
+
+# root files not dir except package
+!package
+
+/index.php
+/license.txt
+/xml*
