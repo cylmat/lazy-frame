@@ -3,7 +3,11 @@
 
 # wordpress except theme
 /wp-*
-!/wp-content/themes/bulk-child/
+!/wp-content
+/wp-content/*
+!/wp-content/themes
+/wp-content/themes/*
+!/wp-content/themes/bulk-child
 
 # project
 /nbproject
@@ -13,7 +17,3 @@
 
 # root files not dir except package
 !package
-
-/index.php
-/license.txt
-/xml*
