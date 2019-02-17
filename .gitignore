@@ -3,7 +3,7 @@
 
 # wordpress except theme
 /wp-*
-!/wp_content/themes/bulk-child/
+!/wp-content/themes/bulk-child/
 
 # project
 /nbproject
@@ -12,5 +12,4 @@
 .htaccess
 
 # root files not dir except package
-*.???
 !package
