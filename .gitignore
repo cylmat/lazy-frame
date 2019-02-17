@@ -7,7 +7,7 @@
 /wp-content/*
 !/wp-content/themes
 /wp-content/themes/*
-!/wp-content/themes/bulk-child
+!/wp-content/themes/*-child
 
 # project
 /nbproject
@@ -16,4 +16,5 @@
 .htaccess
 
 # root files not dir except package
+/xml*
 !package
