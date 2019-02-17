@@ -1,4 +1,3 @@
-/nbproject/
-/wp*
-/node*
-.htaccess
+*
+!/myapp_wp
+!/wp_content/themes/bulk-child
