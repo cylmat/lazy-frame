@@ -1,7 +1,16 @@
-!/myapp_wp/
-!/wp_content/themes/bulk-child/
-!/package*
+# node
 /node_modules
+
+# wordpress except theme
 /wp-*
+!/wp_content/themes/bulk-child/
+
+# project
 /nbproject
+
+# htaccess
 .htaccess
+
+# root files not dir except package
+*.???
+!package
