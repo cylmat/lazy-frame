@@ -13,8 +13,7 @@
 /nbproject
 
 # htaccess
-.htaccess
+/.htaccess
 
 # root files not dir except package
 /xml*
-!package

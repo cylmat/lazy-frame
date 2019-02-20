@@ -12,6 +12,7 @@ Tags: light, gray, white, one-column, two-columns, right-sidebar
 
 
 @import url("../bulk/style.css");
+* { color:green }
 body {
     font-family: 'Roboto Condensed', "Helvetica Neue", helvetica, arial, sans-serif;
     padding: 0;
