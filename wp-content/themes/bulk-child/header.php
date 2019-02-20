@@ -23,6 +23,6 @@
                 
 	</head>
 	<body id="blog" <?php body_class(); ?>>
-help is your passion
+<? print 'so what\'s ... ? ' ; ?>
 		<?php get_template_part( 'template-parts/template-part', 'topnav' ); ?>
 			<div class="page-area">	
