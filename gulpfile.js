@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * REQUIRES
  */
@@ -114,6 +115,21 @@ gulp.task('js', function(){
 /*
  * Serve
  */
+=======
+var gulp        = require('gulp'),
+    browserSync = require('browser-sync').create(),
+    reload      = browserSync.reload;
+
+var htmlWatch = '**/*.html';
+var phpWatch = '**/*.php';
+
+/*gulp.task('browser-sync', function() {
+    browserSync.init({
+        proxy: "http://wordpress:8888"
+    });
+});*/
+
+>>>>>>> 5a120eb79f32eb033a2d6c056a15eaa7fae9b774
 gulp.task('serve', function() {
     browserSync.init({
         injectChanges: true,
@@ -123,6 +139,7 @@ gulp.task('serve', function() {
         host: "wordpress",
         browser: "firefox"
     });
+<<<<<<< HEAD
     
     //gulp.watch("./src/less/*.less").on("change", reload);
     //gulp.watch("./dist/*.html").on("change", reload);
@@ -145,3 +162,14 @@ gulp.task('default', gulp.series('serve'));
     //gulp.watch( "** /*.html" ).on("change", browserSync.reload);
     //gulp.watch( "** /*.js" ).on("change", browserSync.reload);
 })*/
+=======
+    //gulp.watch( htmlWatch, reload );
+    //gulp.watch( phpWatch, reload );
+    gulp.watch( "**/*.php" ).on("change", browserSync.reload);
+    gulp.watch( "**/*.css" ).on("change", browserSync.reload);
+    gulp.watch( "**/*.html" ).on("change", browserSync.reload);
+    gulp.watch( "**/*.js" ).on("change", browserSync.reload);
+});
+
+gulp.task('default', gulp.series('serve'));
+>>>>>>> 5a120eb79f32eb033a2d6c056a15eaa7fae9b774
