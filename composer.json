@@ -1,0 +1,17 @@
+{
+    "name": "camillemaurice/wordpress",
+    "description": "wordpress testing",
+    "type": "project",
+    "require": {
+    },
+    "authors": [
+        {
+            "name": "freeonisland",
+            "email": "freeonisland@yahoo.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    }
+}
