@@ -6,6 +6,12 @@
  * and open the template in the editor.
  */
 
-
-
-include __DIR__.'/Diff.php';
+class Diff {
+    
+    public function get_dialog($x)
+    {
+        return $x+4;
+    }
+    
+   
+}
