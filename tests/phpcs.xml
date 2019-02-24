@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="phpcs.xslt"?>
+<phpcs version="3.4.0">
+
+<file name="D:\web-server\wordpress\myapp_wp\Diff.php" errors="13" warnings="1" fixable="1">
+    <warning line="7" column="2" source="PEAR.Commenting.FileComment.MissingVersion" severity="5" fixable="0">PHP version not specified</warning>
+    <error line="7" column="2" source="PEAR.Commenting.FileComment.MissingCategoryTag" severity="5" fixable="0">Missing @category tag in file comment</error>
+    <error line="7" column="2" source="PEAR.Commenting.FileComment.MissingPackageTag" severity="5" fixable="0">Missing @package tag in file comment</error>
+    <error line="7" column="2" source="PEAR.Commenting.FileComment.MissingAuthorTag" severity="5" fixable="0">Missing @author tag in file comment</error>
+    <error line="7" column="2" source="PEAR.Commenting.FileComment.MissingLicenseTag" severity="5" fixable="0">Missing @license tag in file comment</error>
+    <error line="7" column="2" source="PEAR.Commenting.FileComment.MissingLinkTag" severity="5" fixable="0">Missing @link tag in file comment</error>
+    <error line="11" column="2" source="PEAR.Commenting.ClassComment.MissingCategoryTag" severity="5" fixable="0">Missing @category tag in class comment</error>
+    <error line="11" column="2" source="PEAR.Commenting.ClassComment.MissingPackageTag" severity="5" fixable="0">Missing @package tag in class comment</error>
+    <error line="11" column="2" source="PEAR.Commenting.ClassComment.MissingAuthorTag" severity="5" fixable="0">Missing @author tag in class comment</error>
+    <error line="11" column="2" source="PEAR.Commenting.ClassComment.MissingLicenseTag" severity="5" fixable="0">Missing @license tag in class comment</error>
+    <error line="11" column="2" source="PEAR.Commenting.ClassComment.MissingLinkTag" severity="5" fixable="0">Missing @link tag in class comment</error>
+    <error line="12" column="12" source="PEAR.Classes.ClassDeclaration.OpenBraceNewLine" severity="5" fixable="1">Opening brace of a class must be on the line after the definition</error>
+    <error line="14" column="12" source="PEAR.Commenting.FunctionComment.Missing" severity="5" fixable="0">Missing doc comment for function get_dialog()</error>
+    <error line="14" column="12" source="PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps" severity="5" fixable="0">Public method name &quot;Diff::get_dialog&quot; is not in camel caps format</error>
+</file>
+
+<file name="D:\web-server\wordpress\myapp_wp\includes_app.php" errors="7" warnings="0" fixable="1">
+    <error line="2" column="1" source="PEAR.Commenting.FileComment.WrongStyle" severity="5" fixable="0">You must use &quot;/**&quot; style comments for a file comment</error>
+    <error line="11" column="1" source="PEAR.Commenting.ClassComment.WrongStyle" severity="5" fixable="0">You must use &quot;/**&quot; style comments for a class comment</error>
+    <error line="11" column="18" source="PEAR.Classes.ClassDeclaration.OpenBraceNewLine" severity="5" fixable="1">Opening brace of a class must be on the line after the definition</error>
+    <error line="13" column="5" source="PEAR.Commenting.FunctionComment.Missing" severity="5" fixable="0">Missing doc comment for function get_dialog()</error>
+    <error line="13" column="5" source="PEAR.NamingConventions.ValidFunctionName.NotCamelCaps" severity="5" fixable="0">Method name &quot;Input_Diff::get_dialog&quot; is not in camel caps format</error>
+    <error line="18" column="5" source="PEAR.Commenting.FunctionComment.Missing" severity="5" fixable="0">Missing doc comment for function echo_dialog()</error>
+    <error line="18" column="5" source="PEAR.NamingConventions.ValidFunctionName.NotCamelCaps" severity="5" fixable="0">Method name &quot;Input_Diff::echo_dialog&quot; is not in camel caps format</error>
+</file>
+</phpcs>
+
