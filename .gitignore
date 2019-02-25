@@ -1,5 +1,15 @@
-# node
+# root node - vendor
 /node_modules
+/vendor
+/nbproject
+/var
+/dist
+
+# root files not dir except package
+/.htaccess
+/xml*
+/wordpress.sql
+/xmlrpc.php
 
 # wordpress except theme
 /wp-*
@@ -8,14 +18,3 @@
 !/wp-content/themes
 /wp-content/themes/*
 !/wp-content/themes/*-child
-
-# project
-/nbproject
-
-# htaccess
-.htaccess
-
-# root files not dir except package
-/xml*
-!package
-/vendor/

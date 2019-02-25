@@ -7,5 +7,7 @@
  */
 
 
+include __DIR__.'third/kint.phar';
 
 include __DIR__.'/Diff.php';
+

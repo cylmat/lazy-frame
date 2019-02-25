@@ -23,9 +23,17 @@
                 
 	</head>
 	<body id="blog" <?php body_class(); ?>>
+<<<<<<< HEAD
 <? print 'so what\'s ... ? ' ; require __DIR__.'/../../../myapp_wp/include_app.php';
 echo "r4"; 
 $d = new Diff();
 echo $d->get_dialog(1); ?>
+=======
+<<<<<<< HEAD
+help is yours pass
+=======
+<? print 'so what\'s ... ? ' ; ?>
+>>>>>>> 5a120eb79f32eb033a2d6c056a15eaa7fae9b774
+>>>>>>> 637553fe1b0b6be442726d1c409b8e7c79820573
 		<?php get_template_part( 'template-parts/template-part', 'topnav' ); ?>
 			<div class="page-area">	
