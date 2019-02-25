@@ -1,7 +1,7 @@
 <?php
 
 //use PHPUnit\Framework\TestCase;
-require __DIR__.'/../../../myapp_wp/Diff.php';
+require __DIR__.'/../../application/classes/Diff.php';
 
 
 
