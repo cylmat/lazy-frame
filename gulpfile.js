@@ -7,9 +7,6 @@ var gulp          = require('gulp'),
     reload        = browserSync.reload,
     child_process = require("child_process").exec;
 
-/*
- * Watches 
- */
 var htmlWatch  = '**/*.html',
     phpWatch   = '**/*.php',
     cssWatch   = '**/*.css',
@@ -40,28 +37,13 @@ gulp.task('compile-less', function() {
         .pipe( gulp.dest('./dist/css/') );
 }); 
 
-/* Task to watch less changes */
-gulp.task('watch-less', function() {  
-    gulp.watch( lessWatch , gulp.series('compile-less') );
+gulp.task('phpunit', function() {
+    child_process("phpunit", function(error, stdout) {
+        console.log(error+stdout);
+    });
 });
 
-/*
- * Sass
- */
-var sassSrc = '/src/scss/',
-    sassDist = '/dist/scss/',
-    sassWatch  = '**/*.sass';
-    
-/*
- * Js
- */
-var jsSrc = '/src/js/',
-    jsDist = '/dist/js/';
-
-/*
- * Browser sync
- */
-gulp.task('browser-sync', function() {
+/*gulp.task('browser-sync', function() {
     browserSync.init({
         injectChanges: true,
         watch: true,
@@ -70,60 +52,8 @@ gulp.task('browser-sync', function() {
         host: "wordpress",
         browser: "firefox"
     });
-});
+});*/
 
-/*
- * Style
- */
-gulp.task('style', function(){
-    gulp.src( styleSrc )
-        .pipe( sourcemaps.init())
-        .pipe( sass({
-            errorLogToConsole: true,
-            outputStyle: 'compressed'
-        }) )
-        .on( 'error', console.error.bind( console ))
-        .pipe (autoprefixer({
-            browsers: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe( rename({suffix: '.min'}) )
-        .pipe( sourcemaps.write('./') )
-        .pipe( gulp.dest(styleDist) )
-        .pipe( browserSync.stream() );
-});
-
-/*
- * Js
- */
-gulp.task('js', function(){
-    
-    jsFiles.map(function( entry ){
-        return browserify({
-            entries: [jsFolder]
-        })
-    })
-    
-    jsFiles.map( styleSrc )
-        .pipe( sourcemaps.init())
-        .pipe( sass({
-            errorLogToConsole: true,
-            outputStyle: 'compressed'
-        }) )
-        .on( 'error', console.error.bind( console ))
-        .pipe (autoprefixer({
-            browsers: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe( rename({suffix: '.min'}) )
-        .pipe( sourcemaps.write('./') )
-        .pipe( gulp.dest(styleDist) )
-        .pipe( browserSync.stream() );
-})
-
-/*
- * Serve
- */
 gulp.task('serve', function() {
     browserSync.init({
         injectChanges: true,
@@ -149,13 +79,5 @@ gulp.task('serve', function() {
     //gulp.watch( [htmlWatch, phpWatch, cssWatch] ).on("change"); //, browserSync.reload);
 });
 
-/*
- * Default
- */
+//gulp.task('default', gulp.series('phpunit','serve'));
 gulp.task('default', gulp.series('serve'));
-//gulp.task('default', ['serve']);
-
-/*gulp.task('watch', ['default', 'browserSync'], function(){
-    //gulp.watch( "** /*.html" ).on("change", browserSync.reload);
-    //gulp.watch( "** /*.js" ).on("change", browserSync.reload);
-})*/
