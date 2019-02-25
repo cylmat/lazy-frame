@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- phpunit.xml.dist -->
+
+<!--phpunit bootstrap="tests/bootstrap.php">
+   
+        
+        <php>
+        <env name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test" />
+    </php>
+</phpunit-->
+<phpunit bootstrap="vendor/autoload.php">
+  <testsuites>
+    <testsuite name="money">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  
+  
+  
+    <logging>
+    <!--log type="coverage-html" target="tests_output" /-->
+        <log type="junit" target="tests/logfile.xml" />
+
+    </logging>
+    
+    
+</phpunit>
+
+    

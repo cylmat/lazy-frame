@@ -1,0 +1,22 @@
+# root node - vendor
+/node_modules
+/vendor
+/nbproject
+/var
+/dist
+
+# root files not dir except package
+/.htaccess
+/xml*
+/wordpress.sql
+/xmlrpc.php
+/_wp*
+/*.sql
+
+# wordpress except theme
+/wp-*
+!/wp-content
+/wp-content/*
+!/wp-content/themes
+/wp-content/themes/*
+!/wp-content/themes/*-child
