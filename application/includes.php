@@ -1,13 +1,19 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/** 
+ * Declaration de package.
+ * 
+ * PHP Version 5.6
+ * 
+ * @category Exponentielle
+ * @package  MyPackage
+ * @author   It's me <username@example.com>
+ * @license  Licence name http://license.com
+ * @link     http://license.com
  */
 
 
-include __DIR__.'third/kint.phar';
+require __DIR__.'third/kint.phar';
 
-include __DIR__.'/Diff.php';
+require __DIR__.'/Diff.php';
 

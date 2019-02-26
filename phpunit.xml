@@ -19,7 +19,7 @@
   
     <logging>
     <!--log type="coverage-html" target="tests_output" /-->
-        <log type="junit" target="tests/logfile.xml" />
+        <log type="junit" target="var/phpunit.xml" />
 
     </logging>
     
