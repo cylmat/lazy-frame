@@ -18,5 +18,9 @@
         "visualphpunit/visualphpunit": "^2.3",
         "squizlabs/php_codesniffer": "^3.0@dev",
         "phpmd/phpmd": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "": "application/" },
+        "psr-4": { "": "application/" }
     }
 }

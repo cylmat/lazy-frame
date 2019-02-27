@@ -8,18 +8,18 @@
         <env name="BOOTSTRAP_CLEAR_CACHE_ENV" value="test" />
     </php>
 </phpunit-->
-<phpunit bootstrap="vendor/autoload.php">
+<phpunit>  <!-- bootstrap="vendor/autoload.php" -->
   <testsuites>
-    <testsuite name="money">
-      <directory>tests</directory>
+    <testsuite name="Application">
+      <directory>../tests</directory>
     </testsuite>
   </testsuites>
   
   
   
     <logging>
-    <!--log type="coverage-html" target="tests_output" /-->
-        <log type="junit" target="var/phpunit.xml" />
+    
+        <log type="junit" target="../var/logphpunit.xml" />
 
     </logging>
     

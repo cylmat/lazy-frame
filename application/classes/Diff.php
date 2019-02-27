@@ -1,5 +1,7 @@
 <?php
 
+namespace Diff;
+
 /** 
  * Declaration de package.
  * 
@@ -31,11 +33,50 @@ class Diff
      * Commentaire
      *
      * @param string $xpress Le choix est fait
-     * 
      * @return void le retournement de situation
      */
     public function getDialog($xpress)
     {
-        return $xpress+5;  
+        $too_late=4;
+        $jungle=2;
+        
+        if($too_late)
+        {
+            if($jungle)
+                print '1';
+            else
+                print '2';
+        }
+        else
+        {
+            print 'e';
+            if(2) print '5';
+            else print 'E';
+        }
+        
+        return $xpress+5;
+        
+        if($too_late)
+        {
+            if($jungle)
+                print '1';
+            else
+                print '2';
+        }
+        else
+        {
+            print 'e';
+            if(2) print '5';
+            else print 'E';
+        }
     }
+    
+    public function inside() {}
+    private function too() {}
+    
+    public function elsse() {}
+    private function whats() {}
+    
+    public function doublef() {}
+    private function testttrs() {}
 }

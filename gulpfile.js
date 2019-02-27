@@ -53,12 +53,22 @@ gulp.task('php-unit', function() {
  * Php-cs
  */
 gulp.task('php-cs', function(){
-    child_process('./vendor/bin/phpcs -s --report=xml --report-file=./var/phpcs.xml ./application', function(error,stdout) {
+    //child_process('phpcs -s ./application', function(error,stdout) {
+        child_process('phpcs -s --report=xml --report-file=./var/logphpcs.xml ./application', function(error,stdout) {
         console.log('error'+error);
         console.log("stdout:"+stdout);
         console.log("stderr:"+stdout);
     });
 });
+
+/**
+ * php-md
+ */
+gulp.task('php-md', function(){
+    
+})
+
+
 
 /*gulp.task('browser-sync', function() {
     browserSync.init({

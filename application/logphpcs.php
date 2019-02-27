@@ -7,15 +7,15 @@
  */
 header('Content-Type: text/xml');
 
-$logxml = __DIR__ . '/../var/phpcs.xml';
-$xslt = __DIR__ .'/../var/phpcs.xslt';
+$logxml = __DIR__ . '/../var/logphpcs.xml';
+$logxslt = __DIR__ .'./logphpcs.xslt';
 
 if( file_exists($logxml) && file_exists($xslt) )
 {
     $content = file_get_contents($logxml);
     
     $content = preg_replace( '/<\?xml.?version="1.0".?encoding="UTF-8".?\?>/', '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL.
-                                '<?xml-stylesheet type="text/xsl" href="/var/phpcs.xslt"?>'.PHP_EOL, $content );
+                                '<?xml-stylesheet type="text/xsl" href="'.$logxslt.'"?>'.PHP_EOL, $content );
     
     echo $content;
     die();
