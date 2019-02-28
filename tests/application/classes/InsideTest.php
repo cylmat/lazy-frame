@@ -11,7 +11,7 @@
 //require __DIR__ . '/../../../application/classes/Diff.php';
 
 
-use Application\Classes\Diff;
+use Application\Classes\Inside;
 
 
 /*namespace PHPUnit\Framework;
@@ -33,18 +33,18 @@ class TestCase extends \PHPUnit_Framework_TestCase {
  */
 
 
-class DiffTest extends PHPUnit_Framework_TestCase {
+class InsideTest extends PHPUnit_Framework_TestCase {
     
     public function testGetting()
     {
-        $a = new Application\classes\Diff();
+        $a = new Application\classes\Inside();
         
-        //$f = $a->getDialog(5);
-        $f=4;
+        $f = $a->getMultiple(5, 2);
+        //$f=4;
         //echo $f.' ert';
-        $this->assertTrue(true);
-        $this->assertSame($f,6);
-        $this->assertSame($f,149875);
+        //$this->assertTrue(false);
+        //$this->assertSame($f,6);
+        $this->assertEquals($f,149875);
         $this->assertSame($f,2);
         $this->assertSame($f,2);
         $this->assertSame($f,2);     

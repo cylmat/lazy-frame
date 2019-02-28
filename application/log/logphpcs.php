@@ -7,10 +7,12 @@
  */
 header('Content-Type: text/xml');
 
-$logxml = __DIR__ . '/../var/logphpunit.xml';
-$logxslt = __DIR__ . '/logphpunit.xslt';
+include __DIR__.'/../includes.php';
 
-$hrefxslt = '/application/logphpunit.xslt';
+$logxml = ROOT_PATH . 'var/logphpcs.xml';
+$logxslt = APPLICATION_PATH .'log/logphpcs.xslt';
+
+$hrefxslt = '/application/log/logphpcs.xslt';
 
 if( file_exists($logxml) && file_exists($logxslt) )
 {

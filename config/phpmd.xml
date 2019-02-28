@@ -11,8 +11,8 @@
     </description>
 
     <!-- Import the entire unused code rule set -->
-    <rule ref="../rulesets/unusedcode.xml" />
+    <rule ref="rulesets/unusedcode.xml" />
     
     <!-- Import the entire cyclomatic complexity rule -->
-    <rule ref="../rulesets/codesize.xml/CyclomaticComplexity" />
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity" />
 </ruleset>

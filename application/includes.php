@@ -12,8 +12,13 @@
  * @link     http://license.com
  */
 
+define('ROOT_PATH', __DIR__.'/../');
+define('APPLICATION_PATH', __DIR__.'/');
 
-require __DIR__.'third/kint.phar';
 
-require __DIR__.'/Diff.php';
+
+require APPLICATION_PATH.'third/kint.phar';
+
+//autoload
+require ROOT_PATH.'vendor/autoload.php';
 

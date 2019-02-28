@@ -13,6 +13,7 @@ var gulp          = require('gulp'),
 */
 var htmlWatch  = '**/*.html',
     phpWatch   = '**/*.php',
+    phpIndexWatch = '/index.php',
     cssWatch   = '**/*.css',
     lessWatch  = '**/*.less',
     jsWatch    = '**/*.js',
@@ -42,7 +43,7 @@ gulp.task('compile-less', function() {
  * Php-unit
  */
 gulp.task('php-unit', function() {
-    child_process("phpunit", function(error, stdout, stderr) {
+    child_process("phpunit -c ./config/phpunit.xml", function(error, stdout, stderr) {
         console.log('error'+error);
         console.log("stdout:"+stdout);
         console.log("stderr:"+stdout);
@@ -52,9 +53,9 @@ gulp.task('php-unit', function() {
 /**
  * Php-cs
  */
-gulp.task('php-cs', function(){
+gulp.task('php-cs', function() {
     //child_process('phpcs -s ./application', function(error,stdout) {
-        child_process('phpcs -s --report=xml --report-file=./var/logphpcs.xml ./application', function(error,stdout) {
+        child_process('phpcs ./application --ignore=./application/log/* --report=xml --report-file=./var/logphpcs.xml', function(error,stdout) {
         console.log('error'+error);
         console.log("stdout:"+stdout);
         console.log("stderr:"+stdout);
@@ -64,9 +65,12 @@ gulp.task('php-cs', function(){
 /**
  * php-md
  */
-gulp.task('php-md', function(){
-    
-})
+gulp.task('php-md', function() {
+    child_process('phpmd ./application xml ./config/phpmd.xml --reportfile ./var/logphpmd.xml', function(error, stdout) {
+        console.log('error:'+error);
+        console.log('stdout:'+stdout);
+    });
+});
 
 
 
@@ -95,8 +99,9 @@ gulp.task('serve', function() {
     
     gulp.watch( [htmlWatch, cssWatch, phpWatch, lessWatch, jsWatch] ).on( "change", browserSync.reload );
     
-    gulp.watch( phpWatch ).on( "change", gulp.series('php-unit') );
-    gulp.watch( phpWatch ).on( 'change', gulp.series('php-cs') );
+    gulp.watch( phpIndexWatch ).on( "change", gulp.series('php-unit') );
+    gulp.watch( phpIndexWatch ).on( 'change', gulp.series('php-cs') );
+    gulp.watch( phpIndexWatch ).on( 'change', gulp.series('php-md') );
 
 });
 

@@ -7,15 +7,19 @@
  */
 header('Content-Type: text/xml');
 
-$logxml = __DIR__ . '/../var/logphpcs.xml';
-$logxslt = __DIR__ .'./logphpcs.xslt';
+include __DIR__.'/../includes.php';
 
-if( file_exists($logxml) && file_exists($xslt) )
+$logxml = ROOT_PATH . 'var/logphpunit.xml';
+$logxslt = APPLICATION_PATH . '/log/logphpunit.xslt';
+
+$hrefxslt = '/application/log/logphpunit.xslt';
+
+if( file_exists($logxml) && file_exists($logxslt) )
 {
     $content = file_get_contents($logxml);
     
     $content = preg_replace( '/<\?xml.?version="1.0".?encoding="UTF-8".?\?>/', '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL.
-                                '<?xml-stylesheet type="text/xsl" href="'.$logxslt.'"?>'.PHP_EOL, $content );
+                                '<?xml-stylesheet type="text/xsl" href="'.$hrefxslt.'"?>'.PHP_EOL, $content );
     
     echo $content;
     die();

@@ -19,17 +19,8 @@
         "phpmd/phpmd": "dev-master"
     },
     "autoload": {
-        "psr-0": { 
-            "Application\\":"application/",
-            "Application\\classes\\":"application/classes/"
-        },
         "psr-4": { 
-            "Application\\":"application/",
-            "Application\\classes\\":"application/classes/"
-        },
-        "classmap": [
-            "application/classes/Diff.php",
-            "application/classes"
-        ]
+            "Application\\":"application/"
+        }
     }
 }
