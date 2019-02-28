@@ -43,7 +43,7 @@ class DiffTest extends PHPUnit_Framework_TestCase {
         $f=4;
         //echo $f.' ert';
         $this->assertTrue(true);
-        $this->assertSame($f,6);
+        $this->assertSame($f,7);
         $this->assertSame($f,149875);
         $this->assertSame($f,2);
         $this->assertSame($f,2);

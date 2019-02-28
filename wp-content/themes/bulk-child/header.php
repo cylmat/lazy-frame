@@ -24,7 +24,7 @@
 	</head>
 	<body id="blog" <?php body_class(); ?>>
 
-
+<?php application_classes(); ?>
 
 
 		<?php get_template_part( 'template-parts/template-part', 'topnav' ); ?>

@@ -13,7 +13,7 @@ var gulp          = require('gulp'),
 */
 var htmlWatch  = '**/*.html',
     phpWatch   = '**/*.php',
-    phpIndexWatch = '/index.php',
+    phpIndexWatch = 'index.php',
     cssWatch   = '**/*.css',
     lessWatch  = '**/*.less',
     jsWatch    = '**/*.js',
@@ -91,7 +91,7 @@ gulp.task('serve', function() {
         injectChanges: true,
         //watchEvents : [ 'change', 'add', 'unlink', 'addDir', 'unlinkDir' ],
         watch: true,
-        files: "** /*",
+        files: "**/*",
         proxy: "http://wordpress:8888",
         host: "wordpress",
         browser: "firefox"

@@ -1,7 +1,5 @@
 <?php
 
-namespace Application\Classes;
-
 /** 
  * Declaration de package.
  * 
@@ -13,6 +11,8 @@ namespace Application\Classes;
  * @license  Licence name http://license.com
  * @link     http://license.com
  */
+
+namespace Application\Classes;
 
 /** 
  * Class Diff
@@ -32,8 +32,8 @@ class Diff
      * 
      * Commentaire
      *
-     * @param string $xpress Le choix est fait
-     * @return void le retournement de situation
+     * @param  string $xpress Le choix est fait
+     * @return void Le retournement de situation
      */
     public function getDialog($xpress)
     {
@@ -71,12 +71,6 @@ class Diff
         }
     }
     
-    public function inside() {}
-    private function too() {}
     
-    public function elsse() {}
-    private function whats() {}
-    
-    public function doublef() {}
-    private function testttrs() {}
+    public function doublef() { echo 'double :)'; }
 }
