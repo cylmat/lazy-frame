@@ -40,8 +40,7 @@ class Diff
         $too_late=4;
         $jungle=2;
         
-        if($too_late)
-        {
+        if ($too_late) {
             if($jungle)
                 print '1';
             else
