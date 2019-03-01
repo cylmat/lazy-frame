@@ -5,7 +5,7 @@
 /var
 /dist
 
-# root files not dir except package
+# root files not dir except packa
 /.htaccess
 /xml*
 /wordpress.sql

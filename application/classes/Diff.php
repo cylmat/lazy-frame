@@ -54,7 +54,7 @@ class Diff
             else print 'E';
         }
         
-        return $xpress+5;
+        return $xpress+6;
         
         if($too_late)
         {
@@ -72,5 +72,5 @@ class Diff
     }
     
     
-    public function doublef() { echo 'double :)'; }
+    public function doublef() { echo 'double :) !'; }
 }

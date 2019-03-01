@@ -19,7 +19,7 @@ var htmlWatch  = '**/*.html',
     jsWatch    = '**/*.js',
     sassWatch  = '**/*.sass',
     xmlWatch   = '**/*.xml',
-    cofeeWatch = '**/*.cofee';
+    cofeeWatch = '**/*.coffee';
 
 var src  = './src/',
     dist = './dist/';
@@ -97,7 +97,7 @@ gulp.task('serve', function() {
         browser: "firefox"
     });
     
-    gulp.watch( [htmlWatch, cssWatch, phpWatch, lessWatch, jsWatch] ).on( "change", browserSync.reload );
+    gulp.watch( [htmlWatch, cssWatch, phpWatch, jsWatch] ).on( "change", browserSync.reload );
     
     gulp.watch( phpIndexWatch ).on( "change", gulp.series('php-unit') );
     gulp.watch( phpIndexWatch ).on( 'change', gulp.series('php-cs') );
