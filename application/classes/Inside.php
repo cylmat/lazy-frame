@@ -60,7 +60,7 @@ class Inside
     }
     
     public function inside() {}
-    private function too() {}
+    
     
     public function elsse() {}
     private function whats() {}

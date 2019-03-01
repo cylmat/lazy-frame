@@ -70,7 +70,9 @@ class Diff
             else print 'E';
         }
     }
-    
-    
-    public function doublef() { echo 'double :) !'; }
+
+    /**
+     * Commentaire
+     */
+    public function doublef() { echo 'double salut :)'; }
 }
