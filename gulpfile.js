@@ -40,13 +40,14 @@ var coffeeSrc = src+'coffee/*.coffee',
 /**
  * build
  */
-var cssBuild = build+'css',
-    jsBuild  = build+'js'; 
+var cssBuild = build+'css/',
+    jsBuild  = build+'js/'; 
 
 /**
  * Dist
  */
-var scriptDist = dist+'js';
+var cssDist = dist+'css/';
+var scriptDist = dist+'js/';
   
 /**
  * Less
@@ -62,11 +63,13 @@ gulp.task('less', function() {
  */
 gulp.task('op-css', function() { 
     gulp.src( build+'css/*.css' )
-        .pipe( glp.uglifycss( ) )
-        .pipe( gulp.dest( cssDist ) );
+        .pipe( glp.postcss([ require('autoprefixer') ]) )
+        .pipe( gulp.dest( cssBuild ) );
 }); 
 
-//add postcss
+/**
+ * minify
+ */
 gulp.task('min-css', function() { 
     gulp.src( build+'css/*.css' )
         .pipe( glp.uglifycss( ) )
