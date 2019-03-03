@@ -22,5 +22,15 @@
         "psr-4": { 
             "Application\\":"application/"
         }
+    },
+    "script": {
+        "php": [
+            "@phpunit",
+            "@phpcs",
+            "@phpmd"
+        ],
+        "phpunit": "phpunit -c ./config/phpunit.xml",
+        "phpcs": "phpcs ./application --ignore=./application/log/* --report=xml --report-file=./var/logphpcs.xml",
+        "phpmd": "phpmd ./application xml ./config/phpmd.xml --reportfile ./var/logphpmd.xml"
     }
 }
