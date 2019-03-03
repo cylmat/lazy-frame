@@ -20,17 +20,18 @@
     },
     "autoload": {
         "psr-4": { 
-            "Application\\":"application/"
+            "Application\\":"app/"
         }
     },
-    "script": {
+    "scripts": {
         "php": [
             "@phpunit",
             "@phpcs",
             "@phpmd"
         ],
-        "phpunit": "phpunit -c ./config/phpunit.xml",
-        "phpcs": "phpcs ./application --ignore=./application/log/* --report=xml --report-file=./var/logphpcs.xml",
-        "phpmd": "phpmd ./application xml ./config/phpmd.xml --reportfile ./var/logphpmd.xml"
+        "phpunit-full": "phpunit -c ./config/phpunit.xml",
+        "phpunit": "bash ./config/phpunit_script.sh",
+        "phpcs":   "phpcs ./app --severity=8 --ignore=./app/log/* --report=xml --report-file=./var/logphpcs.xml",
+        "phpmd":   "phpmd ./app xml ./config/phpmd.xml --ignore-violations-on-exit --reportfile ./var/logphpmd.xml"
     }
 }
