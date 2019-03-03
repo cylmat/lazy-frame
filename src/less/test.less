@@ -10,8 +10,8 @@ and open the template in the editor.
 
 @color: red;
 body {margin: 0; display: flex;
-  background: red; z-index:1337; position:relative;
+    background: @color; z-index:1337; position:relative;
 }
 @media (min-width:640px) {
-p {color: @color; box-shadow: 0 0 0 darken(@color, 30%)}
-  }
+    p {color: @color; box-shadow: 0 0 0 darken(@color, 30%)}
+}
