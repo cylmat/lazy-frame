@@ -9,14 +9,16 @@ var gulp         = require('gulp'),
 var glp = glupLoadPlugins();
     
 /**
-* WATCHES
+* Dir
 */
 var src  = './src/',
-    build= './build', 
+    build= './build/', 
     dist = './dist/';
 
-
-var htmlWatch  = src+'**/*.html',
+/**
+ * Watches
+ */
+var htmlWatch  = src+'html/*.html',
     lessWatch  = src+'less/*.less',
     sassWatch  = src+'sass/*.sass',
     coffeeWatch= src+'coffee/*.coffee';    
@@ -28,56 +30,77 @@ var htmlWatch  = src+'**/*.html',
 
 var cssDist = dist+'css/',
     jsDist  = dist+'js/';
+    
+/**
+ * Src
+ */
+var coffeeSrc = src+'coffee/*.coffee',
+    lessSrc   = src+'less/*.less';
+    
+/**
+ * build
+ */
+var cssBuild = build+'css',
+    jsBuild  = build+'js'; 
+
+/**
+ * Dist
+ */
+var scriptDist = dist+'js';
   
 /**
  * Less
  */
-gulp.task('less', function() {  
+gulp.task('less', function() { 
     gulp.src( lessWatch )
         .pipe( glp.less( ) )
-        .pipe( gulp.dest( cssBuild ) )
-        .pipe( browserSync.reload() );
+        .pipe( gulp.dest( cssBuild ) );
 }); 
 
-gulp.task('minify', function(){
-    gulp.src('');
+/**
+ * optimize
+ */
+gulp.task('op-css', function() { 
+    gulp.src( build+'css/*.css' )
+        .pipe( glp.uglifycss( ) )
+        .pipe( gulp.dest( cssDist ) );
+}); 
+
+//add postcss
+gulp.task('min-css', function() { 
+    gulp.src( build+'css/*.css' )
+        .pipe( glp.uglifycss( ) )
+        .pipe( gulp.dest( cssDist ) );
+}); 
+
+/**
+ * Coffee
+ */
+gulp.task('coffee', function() {
+    gulp.src( coffeeSrc )
+        .pipe( glp.coffee( {bare: true} ) )
+        .pipe( gulp.dest( jsBuild ));
 });
 
 /**
- * Php-unit
- *
-gulp.task('php-unit', function() {
-    child_process("phpunit -c ./config/phpunit.xml", function(error, stdout, stderr) {
-        console.log('error'+error);
-        console.log("stdout:"+stdout);
-        console.log("stderr:"+stdout);
-    });
-});
+ * build
+ */
+gulp.task('build', gulp.parallel('less', 'coffee'));
 
 /**
- * Php-cs
- *
-gulp.task('php-cs', function() {
-    //child_process('phpcs -s ./application', function(error,stdout) {
-        child_process('phpcs ./application --ignore=./application/log/* --report=xml --report-file=./var/logphpcs.xml', function(error,stdout) {
-        console.log('error'+error);
-        console.log("stdout:"+stdout);
-        console.log("stderr:"+stdout);
-    });
-});
+ * optimize
+ */
+gulp.task('op', gulp.parallel('op-css'));
 
 /**
- * php-md
- *
-gulp.task('php-md', function() {
-    child_process('phpmd ./application xml ./config/phpmd.xml --reportfile ./var/logphpmd.xml', function(error, stdout) {
-        console.log('error:'+error);
-        console.log('stdout:'+stdout);
-    });
-});*/
+ * minify
+ */
+gulp.task('min', gulp.parallel('min-css'));
 
 
-
+/**
+ * browser
+ */
 gulp.task('browser_sync', function() {
     browserSync({
         injectChanges: true,
@@ -102,13 +125,10 @@ gulp.task('serve', function() {
     browser_sync.reload();
     
     gulp.watch( [htmlWatch, cssWatch, phpWatch, jsWatch] ).on( "change", browserSync.reload );
-    gulp.watch( [lessWatch] ).on( "change", gulp.series('less'));
+    //gulp.watch( [lessWatch] ).on( "change", gulp.series('less'));
     
     //gulp.watch( phpIndexWatch ).on( "change", gulp.series('php-unit') );
-    //gulp.watch( phpIndexWatch ).on( 'change', gulp.series('php-cs') );
-    //gulp.watch( phpIndexWatch ).on( 'change', gulp.series('php-md') );
 
 });
 
-//gulp.task('default', gulp.series('phpunit','serve'));
 gulp.task('default', gulp.series('serve'));
