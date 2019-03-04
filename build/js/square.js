@@ -1,4 +1,4 @@
-var cube, fill, square;
+var cube, square;
 
 square = function(x) {
   return x * x;
@@ -6,8 +6,4 @@ square = function(x) {
 
 cube = function(x) {
   return square(x) * x;
-};
-
-fill = function(container, liquid = "coffee") {
-  return `Filling the ${container} with ${liquid}...`;
 };

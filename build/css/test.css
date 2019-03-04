@@ -20,3 +20,15 @@ body {
     box-shadow: 0 0 0 #000000;
   }
 }
+::-webkit-input-placeholder {
+  color: gray;
+}
+:-ms-input-placeholder {
+  color: gray;
+}
+::-ms-input-placeholder {
+  color: gray;
+}
+::placeholder {
+  color: gray;
+}
