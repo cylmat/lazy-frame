@@ -5,9 +5,10 @@ var gulp         = require('gulp'),
     browserSync  = require('browser-sync').create(),
     childProcess = require("child_process").exec,
     glupLoadPlu  = require('gulp-load-plugins'),
-    stylelint    = require('gulp-stylelint') ;
+    jshintXMLReporter = require('gulp-jshint-xml-file-reporter');
     
 var glp = glupLoadPlu();
+const stylish = require('jshint-stylish');
     
 /**
 * Dir
@@ -51,7 +52,7 @@ var cssDist = dist+'css/';
 var scriptDist = dist+'js/';
 
 /**
- * remove
+ * Clean
  */
 gulp.task('clean', function(){
     gulp.src( build+'**/*' )
@@ -62,7 +63,7 @@ gulp.task('clean', function(){
 });
   
 /**
- * Less
+ * Css
  */
 gulp.task('css', function() { 
     //BUILD
@@ -72,15 +73,15 @@ gulp.task('css', function() {
         .pipe( gulp.dest( cssBuild ) );
 
     //VALID
-    gulp.src( cssBuild+'*.css' )
+    /*gulp.src( cssBuild+'*.css' )
         .pipe( stylelint({
             reportOutputDir: './var/'
            /* reporters: [
                 {formatter: 'string', save: 'csslintreport.txt'}//,
                 //{formatter: 'json', save: 'report.json'},
                 //{formatter: myStylelintFormatter, save: 'my-custom-report.txt'}
-            ]*/
-        }));
+            ]*
+        }));*/
         /*.pipe( glp.rename( function(a){
             a.extname = '.valid';
         }))*/
@@ -94,7 +95,7 @@ gulp.task('css', function() {
 }); 
 
 /**
- * Coffee
+ * Javascript
  */
 gulp.task('js', function() {
     gulp.src( coffeeSrc )
@@ -107,12 +108,21 @@ gulp.task('js', function() {
 });
 
 /**
- * build
+ * JSHint
  */
-/*gulp.task('build', gulp.series('clean'), function(){
-    gulp.series('less', 'coffee');
-});*/
+gulp.task('jshint', function() {
+  return gulp.src('./build/js/*.js')
+    .pipe(glp.jshint())
+    .pipe(glp.jshint.reporter(jshintXMLReporter))
+    .on('end', jshintXMLReporter.writeFile({
+            format: 'checkstyle',
+            filePath: './var/jshint.xml'
+        }));
+});
 
+/**
+ * Build task
+ */
 exports.build = gulp.series(gulp.parallel('css', 'js'));
 
 

@@ -7,3 +7,5 @@ square = function(x) {
 cube = function(x) {
   return square(x) * x;
 };
+
+installing __ger__

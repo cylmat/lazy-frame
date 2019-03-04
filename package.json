@@ -16,6 +16,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-if": "^2.0.2",
     "gulp-jshint": "^2.1.0",
+    "gulp-jshint-xml-file-reporter": "^0.5.1",
     "gulp-less": "^4.0.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-rename": "^1.4.0",
@@ -31,28 +32,54 @@
     "gulp-util": "^3.0.8",
     "gulp-w3c-css": "^2.0.0",
     "html5-lint": "^0.3.0",
+    "jshint": "^2.10.1",
+    "jshint-junit-reporter": "^0.2.3",
+    "jshint-stylish": "^2.2.1",
     "parcel": "^1.11.0",
     "run-sequence": "^2.2.1",
     "underscore": "^1.9.1"
   },
   "stylelint": {
-        "rules": {
-            "block-no-empty": null,
-            "color-no-invalid-hex": true,
-            "comment-empty-line-before": [ "always", {
-              "ignore": ["stylelint-commands", "after-comment"]
-            } ],
-            "declaration-colon-space-after": "always",
-            "indentation": ["tab", {
-              "except": ["value"]
-            }],
-            "max-empty-lines": 2,
-            "rule-empty-line-before": [ "always", {
-              "except": ["first-nested"],
-              "ignore": ["after-comment"]
-            } ],
-            "unit-whitelist": ["em", "rem", "%", "s"]
-      }
+    "rules": {
+      "block-no-empty": null,
+      "color-no-invalid-hex": true,
+      "comment-empty-line-before": [
+        "always",
+        {
+          "ignore": [
+            "stylelint-commands",
+            "after-comment"
+          ]
+        }
+      ],
+      "declaration-colon-space-after": "always",
+      "indentation": [
+        "tab",
+        {
+          "except": [
+            "value"
+          ]
+        }
+      ],
+      "max-empty-lines": 2,
+      "rule-empty-line-before": [
+        "always",
+        {
+          "except": [
+            "first-nested"
+          ],
+          "ignore": [
+            "after-comment"
+          ]
+        }
+      ],
+      "unit-whitelist": [
+        "em",
+        "rem",
+        "%",
+        "s"
+      ]
+    }
   },
   "scripts": {
     "test": ""
