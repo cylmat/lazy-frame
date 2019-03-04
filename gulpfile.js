@@ -121,6 +121,14 @@ gulp.task('jshint', function() {
 });
 
 /**
+ * JSHint
+ */
+gulp.task('qunit', function() {
+  return gulp.src('./build/js/*.js')
+     .pipe( glp.qunit() );
+});
+
+/**
  * Build task
  */
 exports.build = gulp.series(gulp.parallel('css', 'js'));

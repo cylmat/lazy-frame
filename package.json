@@ -1,13 +1,17 @@
 {
   "requires": true,
   "lockfileVersion": 1,
-  "dependencies": {},
+  "dependencies": {
+    "gulp-qunit": "^2.0.2",
+    "gulp-qunits": "^2.1.2"
+  },
   "name": "wordpress",
   "description": "wordpress",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
     "browser-sync": "^2.26.3",
+    "browserify": "^16.2.3",
     "child_process": "^1.0.2",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
@@ -36,6 +40,7 @@
     "jshint-junit-reporter": "^0.2.3",
     "jshint-stylish": "^2.2.1",
     "parcel": "^1.11.0",
+    "qunit": "^2.9.2",
     "run-sequence": "^2.2.1",
     "underscore": "^1.9.1"
   },
