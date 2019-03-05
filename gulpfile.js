@@ -7,6 +7,9 @@ var gulp         = require('gulp'),
     glupLoadPlu  = require('gulp-load-plugins'),
     jshintXMLReporter = require('gulp-jshint-xml-file-reporter');
     
+var jest = require('gulp-jest').default;
+
+    
 var glp = glupLoadPlu();
 const stylish = require('jshint-stylish');
     
@@ -121,11 +124,14 @@ gulp.task('jshint', function() {
 });
 
 /**
- * JSHint
+ * Jest
  */
-gulp.task('qunit', function() {
-  return gulp.src('./build/js/*.js')
-     .pipe( glp.qunit() );
+gulp.task('jest', function() {
+  return gulp.src('./tests/scripts/outhere.test.js')
+     .pipe( jest({
+            "outputFile": "./var/testingjest.out.xml"
+          }) )
+     .pipe( gulp.dest( './var/jest.test' ));
 });
 
 /**
