@@ -5,10 +5,9 @@
  */
 
 
-const outhere = require('outhere');
 
+function typo(a, b) {
+    return a * b;
+}
 
-test('adds 3 + 2 to equal 5', () => {
-    expect( outhere(3, 2) ).toBe(5);
-});
-
+module.exports = typo;

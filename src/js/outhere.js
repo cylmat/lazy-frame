@@ -5,8 +5,8 @@
  */
 
 
-function sumit(a, b) {
+function outhere(a, b) {
     return a + b;
 }
 
-module.exports = sumit;
+module.exports = outhere;
