@@ -94,7 +94,6 @@
     }
   },
   "jest": {
-     "verbose": true,
      "reporters": ["jest-junit"]
   },
   "jest-junit": {

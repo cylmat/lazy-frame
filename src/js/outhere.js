@@ -5,7 +5,8 @@
  */
 
 
-var number = 2;
+function sumit(a, b) {
+    return a + b;
+}
 
-
-var text = 'Mon texte';
+module.exports = sumit;
