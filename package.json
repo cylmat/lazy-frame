@@ -1,10 +1,7 @@
 {
   "requires": true,
   "lockfileVersion": 1,
-  "dependencies": {
-    "gulp-qunit": "^2.0.2",
-    "gulp-qunits": "^2.1.2"
-  },
+  "dependencies": {},
   "name": "wordpress",
   "description": "wordpress",
   "version": "1.0.0",
@@ -25,11 +22,8 @@
     "gulp-less": "^4.0.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-rename": "^1.4.0",
-    "gulp-revision": "^1.0.0",
     "gulp-rm": "^2.0.0",
     "gulp-sass": "^4.0.2",
-    "gulp-sequence": "^1.0.0",
-    "gulp-series": "^1.0.2",
     "gulp-shell": "^0.6.5",
     "gulp-standard": "^12.0.0",
     "gulp-stylelint": "^8.0.0",
@@ -45,10 +39,8 @@
     "jshint-junit-reporter": "^0.2.3",
     "jshint-stylish": "^2.2.1",
     "parcel": "^1.11.0",
-    "qunit": "^2.9.2",
-    "qunit-reporter-junit": "^1.1.1",
     "require-dir": "^1.2.0",
-    "run-sequence": "^2.2.1",
+    "stylelint": "^9.10.1",
     "underscore": "^1.9.1"
   },
   "stylelint": {
@@ -94,8 +86,14 @@
     }
   },
   "jest": {
-     "verbose": true,
-     "reporters": ["jest-junit"]
+    "modulePaths": [
+      "<rootDir>/src/js",
+      "<rootDir>/build/js"
+    ],
+    "reporters": [
+      "jest-junit"
+    ],
+    "verbose": true
   },
   "jest-junit": {
     "suiteName": "jest tests",

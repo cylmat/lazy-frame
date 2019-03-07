@@ -5,8 +5,9 @@
  */
 
 
-function outhere(a, b) {
-    return a + b;
+
+function typo(a, b) {
+    return a * b;
 }
 
-module.exports = outhere;
+module.exports = typo;
