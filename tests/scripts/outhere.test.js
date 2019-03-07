@@ -5,13 +5,26 @@
  */
 
 
-//const sum = require('../build/js/outhere');
+//const { isitsum } = require('./outhere.js');
 
-function sum(a, b) {
-  return a + b;
+console.log('gamma');
+const { isitsum } = require('outhere.js');
+
+//console.log( isitsum );
+console.log('delta');
+console.log( isitsum );
+
+console.log('alpha');
+
+function sumit(a, b) {
+    return a + b;
 }
+
+//var a = isitsum(3, 7);
 
 test('adds 1 + 2 to equal 3', 
 () => {
-    expect( sum(1, 2) ).toBe(3);
+    expect( sumit(1, 2) ).toBe(3);
+    
+    //expect( isitsum(1, 2) ).toBe(4);
 });

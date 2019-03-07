@@ -7,11 +7,16 @@
 
 var number = 2;
 
-
 var text = 'Mon texte';
 
-function sum(a, b) {
-  return a + b;
-}
+function isitsum (a, b) {
+     return a + b + 1;
+};
 
-module.exports = sum;
+var isit_sum = function  (a, b) {
+     return a + b + 1;
+};
+
+module.exports = isit_sum;
+
+export default { isitsum }

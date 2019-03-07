@@ -101,11 +101,29 @@
     "suiteName": "jest tests",
     "outputDirectory": "./var",
     "outputName": "./jest_junit.xml",
-    "usePathForSuiteName": "true"
+    "usePathForSuiteName": "true",
+    "collectCoverage": "true",
+    "collectCoverageFrom ": [
+        "./src/**/*.{js}"
+    ],
+    "verbose": "true"
+  },
+  "jest-junit-ed": {
+      "testMatch": [
+		"<rootDir>/test/**/*.test.ts?(x)"
+	],
+	"collectCoverage":  true,
+	"collectCoverageFrom": [
+		"<rootDir>/src/**/*.{ts,tsx}"
+	],
+	"coverageReporters": ["lcov"],
+	"transform": {
+		"^.+\\.(ts|tsx)$":  "ts-jest",
+		"^(?!.*\\.(js|jsx|css|json)$)":  "<rootDir>/fileTransform.js" 
+	}
   },
   "scripts": {
-    "test": "jest",
-    "jtest": "jest --reporters=jest-junit --json --outputFile=./var/npmtest.xml"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

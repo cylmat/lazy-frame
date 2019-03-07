@@ -9,3 +9,16 @@ var number = 2;
 
 
 var text = 'Mon texte';
+
+function isitsum (a, b) {
+     return a + b + 1;
+};
+
+var isit_sum = function  (a, b) {
+     return a + b + 1;
+};
+
+module.exports = isitsum;
+exports.isitsum = 4;
+
+export default { isitsum }
