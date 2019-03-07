@@ -9,6 +9,13 @@ var gulp         = require('gulp'),
     
 var jest = require('gulp-jest').default;
 
+/*
+ * generator-express
+ * generator-webapp
+ * generator-modern-frontend
+ * generator-starterkit
+ */
+
     
 var glp = glupLoadPlu();
 const stylish = require('jshint-stylish');
