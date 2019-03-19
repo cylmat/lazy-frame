@@ -5,15 +5,24 @@ var gulp         = require('gulp'),
     browserSync  = require('browser-sync').create(),
     childProcess = require("child_process").exec,
     glupLoadPlu  = require('gulp-load-plugins'),
-    jshintXMLReporter = require('gulp-jshint-xml-file-reporter');
-    
-var jest = require('gulp-jest').default;
+    jshintXMLReporter = require('gulp-jshint-xml-file-reporter'),
+
+    jshint = require('gulp-jshint'),
+    jshintStylishFile = require('jshint-stylish-file'),
+
+    junitFormatter = require('stylelint-junit-formatter'),
+    stylelint = require('gulp-stylelint'),
+    jest = require('gulp-jest').default;
 
 /*
+sudo chown -R $USER:$(id -gn $USER) ~/.npm
+
  * generator-express
  * generator-webapp
  * generator-modern-frontend
  * generator-starterkit
+ 
+ PHP server (wamp alternative) : "gulp-connect-php"
  */
 
     
@@ -104,6 +113,18 @@ gulp.task('css', function() {
         .pipe( gulp.dest( cssDist ) );
 }); 
 
+/*
+ * stylelint
+ */
+gulp.task('stylelint', function(){
+    gulp.src(build+cssDir+cssFiles)
+        .pipe(stylelint({
+            reporters: [
+                {formatter: 'verbose', console: true, save: 'var/css_reports/stylelint.txt'}
+            ]
+        }));
+});
+
 /**
  * Javascript
  */
@@ -128,7 +149,17 @@ gulp.task('jshint', function() {
             format: 'checkstyle',
             filePath: './var/jshint.xml'
         }));
+      
 });
+
+/*gulp.task('jshint', function() {
+    gulp.src( [src+jsDir+jsFiles, src+jsDir+jsFiles] )
+        .pipe(jshint())
+        .pipe(jshint.reporter( 
+            jshintStylishFile, 
+            {beep: true, output: 'var/js_reports/jshint.txt' }
+        ));
+});*/
 
 /**
  * Jest
@@ -141,6 +172,13 @@ gulp.task('jest', function() {
      .pipe( gulp.dest( './var/jest.test' ));
 });
 
+/*
+ * gulp.task('jest', function() {
+    gulp.src(tests+jsDir+jsFiles)
+        .pipe( jest() );
+});
+ */
+
 /**
  * Build task
  */
@@ -150,8 +188,8 @@ exports.build = gulp.series(gulp.parallel('css', 'js'));
 /**
  * browser
  */
-gulp.task('browser_sync', function() {
-    browserSync({
+gulp.task('browser-sync-init', function() {
+    browserSync.init({
         injectChanges: true,
         files: "** /*",
         proxy: "http://wordpress:8888",
@@ -160,25 +198,24 @@ gulp.task('browser_sync', function() {
     });
 });
 
-gulp.task('serve', function() {
-    
-    /*browserSync.init({
-        injectChanges: true,
-        //watchEvents : [ 'change', 'add', 'unlink', 'addDir', 'unlinkDir' ],
-        watch: true,
-        files: "** /*",
-        proxy: "http://wordpress:8888",
-        host: "wordpress",
-        browser: "firefox"
-    });*/
-    browser_sync.reload();
-    
+/*
+ * watch
+ */
+gulp.task('watch', function(){
+    gulp.watch( src+lessDir+lessFiles ).on( 'change', gulp.series('css'));
+});
+
+gulp.task('serve', gulp.parallel('watch', 'browser-sync-init'), function() {
     gulp.watch( [htmlWatch, cssWatch, phpWatch, jsWatch] ).on( "change", browserSync.reload );
-    //gulp.watch( [lessWatch] ).on( "change", gulp.series('less'));
-    
-    //gulp.watch( phpIndexWatch ).on( "change", gulp.series('php-unit') );
 
 });
+
+/*
+ * gulp.task('serve', gulp.parallel('watch','browser-sync-init'), function(){
+    gulp.watch( '** /*.php' ).on( 'change', browsersync.reload );
+    gulp.watch( build+cssDir+cssFiles ).on( 'change', browsersync.reload );
+});
+ */
 
 //gulp.task('default', gulp.series('serve'));
 exports.default = gulp.series('serve');

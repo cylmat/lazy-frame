@@ -10,28 +10,34 @@
             "email": "freeonisland@yahoo.fr"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "require-dev": {
+        "kint-php/kint": "^3.1",
+        "phpmd/phpmd": "dev-master",
         "phpunit/phpunit": "^4.6",
         "phpunit/phpunit-skeleton-generator": "*",
-        "squizlabs/php_codesniffer": "^3.0@dev",
-        "phpmd/phpmd": "dev-master"
+        "squizlabs/php_codesniffer": "^3.0",
+        "monolog/monolog": "latest",
+        "jbroadway/analog": "latest"
     },
     "autoload": {
         "psr-4": { 
-            "Application\\":"app/"
+            "App\\":"app/"
         }
     },
     "scripts": {
-        "php": [
+        "test": [
             "@phpunit",
             "@phpcs",
             "@phpmd"
         ],
-        "phpunit-full": "phpunit -c ./config/phpunit.xml",
-        "phpunit": "bash ./config/phpunit_script.sh",
-        "phpcs":   "phpcs ./app --severity=8 --ignore=./app/log/* --report=xml --report-file=./var/logphpcs.xml",
-        "phpmd":   "phpmd ./app xml ./config/phpmd.xml --ignore-violations-on-exit --reportfile ./var/logphpmd.xml"
+        "phpcs_e": "phpcs --config-set ignore_errors_on_exit 1",
+        "phpcs_w": "phpcs --config-set ignore_warnings_on_exit 1",
+        
+        "phpcs": "phpcs app --report=xml --report-file=var/php_reports/phpcs.xml",
+        "phpmd": "phpmd app xml cleancode,codesize,controversial,design,naming,unusedcode --reportfile var/php_reports/phpmd.xml --ignore-violations-on-exit",
+        "phpunit": "bash config/phpunit.sh",
+        "phpunit-bash": "phpunit tests --bootstrap vendor/autoload.php --log-junit var/php_reports/phpunit_report.xml"
     }
 }
