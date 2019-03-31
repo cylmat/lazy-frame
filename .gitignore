@@ -1,22 +1,25 @@
-# root node - vendor
-/node_modules
-/vendor
-/nbproject
-/var
+/build
 /dist
+/doc
+/img
+/nbproject
+/node_modules
+/var
+/vendor
 
-# root files not dir except packa
-/.htaccess
-/xml*
-/wordpress.sql
-/xmlrpc.php
-/_wp*
-/*.sql
-
-# wordpress except theme
-/wp-*
+/wp*
 !/wp-content
+
 /wp-content/*
 !/wp-content/themes
+!/wp-content/mu-plugins
+!/wp-content/plugins
+
 /wp-content/themes/*
-!/wp-content/themes/*-child
+!/wp-content/themes/vuetheme
+!/wp-content/themes/mytheme
+
+/wp-content/plugins/*
+!/wp-content/plugins/list.info
+!/wp-content/plugins/myplug
+!/wp-content/plugins/boiler
