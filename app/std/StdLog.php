@@ -9,8 +9,10 @@
 *       rawurlencode() ou addslashes() avant d'appeler la fonction error_log(). 
 */
 
-function std_print($a,$ext='') { echo '<pre>'; print_r($a); echo '</pre>', $ext . '<br/>' . PHP_EOL; }
-function std_dump($a,$ext='') { echo '<pre>'; var_dump($a); echo '</pre>', $ext . '<br/>' . PHP_EOL; }
+if(!function_exists('std_print'))
+    function std_print($a,$ext='') { echo '<pre>'; print_r($a); echo '</pre>', $ext . '<br/>' . PHP_EOL; }
+if(!function_exists('std_dump'))
+    function std_dump($a,$ext='') { echo '<pre>'; var_dump($a); echo '</pre>', $ext . '<br/>' . PHP_EOL; }
 
 defined('STDLOG_ERROR_ACTIVE') OR define('STDLOG_ERROR_ACTIVE',0);
 
