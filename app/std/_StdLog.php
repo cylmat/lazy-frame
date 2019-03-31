@@ -3,59 +3,17 @@
 //namespace SeasLog;
 
 /*
-* user_error($msg, E_USER_NOTICE | E_USER_DEPRECATED | E_USER_WARNING | E_USER_ERROR).
-* 
-* error_log("Grosse bourde !", 3, "/var/tmp/mes-erreurs.log");
-*       rawurlencode() ou addslashes() avant d'appeler la fonction error_log(). 
-*/
-
-function std_print($a,$ext='') { echo '<pre>'; print_r($a); echo '</pre>', $ext . '<br/>' . PHP_EOL; }
-function std_dump($a,$ext='') { echo '<pre>'; var_dump($a); echo '</pre>', $ext . '<br/>' . PHP_EOL; }
-
-defined('STDLOG_ERROR_ACTIVE') OR define('STDLOG_ERROR_ACTIVE',0);
-
-if(!function_exists('stringtype'))
-function stringtype($arg, $num='') 
-{ 
-    if(NULL===$arg) return;
-    $b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-    
-    if(!is_string($arg)) user_error (
-        'Argument '.$num.' passed to '.$b[1]['class'].'::'.$b[1]['function'].'() must be of the type string, '.gettype($arg).' given, ' .PHP_EOL.
-        'called in '.$b[1]['file'].' on line '.$b[1]['line'].', ' .PHP_EOL.
-        'and defined in '.$b[0]['file'].' on line '.$b[0]['line'], E_USER_WARNING );
-}
-
-if(!function_exists('integertype'))
-function integertype($arg, $num='') 
-{ 
-    if(NULL===$arg) return;
-    $b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-    
-    if(!is_integer($arg)) user_error (
-        'Argument '.$num.' passed to '.$b[1]['class'].'::'.$b[1]['function'].'() must be of the type integer, '.gettype($arg).' given, ' .PHP_EOL.
-        'called in '.$b[1]['file'].' on line '.$b[1]['line'].', ' .PHP_EOL.
-        'and defined in '.$b[0]['file'].' on line '.$b[0]['line'] , E_USER_WARNING );
-}
-
-if(!function_exists('booleantype'))
-function booleantype($arg, $num='') 
-{ 
-    if(NULL===$arg) return;
-    $b = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-    
-    if(!is_bool($arg)) user_error (
-        'Argument '.$num.' passed to '.$b[1]['class'].'::'.$b[1]['function'].'() must be of the type boolean, '.gettype($arg).' given, ' .PHP_EOL.
-        'called in '.$b[1]['file'].' on line '.$b[1]['line'].', ' .PHP_EOL.
-        'and defined in '.$b[0]['file'].' on line '.$b[0]['line'] , E_USER_WARNING );
-}
+     * user_error($msg, E_USER_NOTICE | E_USER_DEPRECATED | E_USER_WARNING | E_USER_ERROR).
+     * 
+     * error_log("Grosse bourde !", 3, "/var/tmp/mes-erreurs.log");
+     *       rawurlencode() ou addslashes() avant d'appeler la fonction error_log(). 
+     */
 
 /**
  * Class StdLog
  */
+defined('STDLOG_ERROR_ACTIVE') OR define('STDLOG_ERROR_ACTIVE',0);
 class StdLog extends SeasLog {  }
-
-
 
 
 /**
@@ -88,21 +46,7 @@ function stdlog_alert ($message, $content=[], $logger=NULL)      { StdLog::alert
 function stdlog_emergency ($message, $content=[], $logger=NULL)  { StdLog::emergency ( $message, $content, $logger ); }
 function stdlog_critical ($message, $content=[], $logger=NULL)   { StdLog::critical ( $message, $content, $logger ); }
 
-function stdlog_getBuffer ($logger=NULL, $level=NULL)   { return StdLog::getBuffer ($logger, $level); }
-
-function stdlog_analyzerDetail ( $level=SEASLOG_ALL, $log_path=NULL, $key_word=NULL, $start=1, $limit=20, $order=SEASLOG_DETAIL_ORDER_ASC )
-    { return StdLog::analyzerDetail ( $level, $log_path, $key_word, $start, $limit, $order ); }
-    
-    
-/**
- * alias
- */
-if(!function_exists('_i')) function _i($message, $content=[], $logger=NULL)      { StdLog::info ( $message, $content, $logger ); }
-if(!function_exists('_d')) function _d($message, $content=[], $logger=NULL)      { StdLog::debug ( $message, $content, $logger ); }
-if(!function_exists('_w')) function _w($message, $content=[], $logger=NULL)      { StdLog::warning ( $message, $content, $logger ); }
-if(!function_exists('_e')) function _e($message, $content=[], $logger=NULL)      { if(STDLOG_ERROR_ACTIVE) user_error($message, E_USER_ERROR); StdLog::error ( $message, $content, $logger ); }
-if(!function_exists('_g')) function _g ($logger=NULL, $level=NULL)   { return StdLog::getBuffer ($logger, $level); }
-if(!function_exists('_gd')) function _gd ($logger=NULL, $level=NULL)   { $a = _g($logger=NULL, $level=NULL); pprint( $a ); }
+function stdlog_getBuffer ($logger=NULL, $level=NULL)   { StdLog::getBuffer ($logger, $level); }
 
 
 /*******************************************
@@ -116,18 +60,11 @@ if(!function_exists('_gd')) function _gd ($logger=NULL, $level=NULL)   { $a = _g
 
 
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
 
 
 
@@ -890,50 +827,42 @@ class SeasLog {
     private static function _backtrace()
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-
+        
         //passe ce fichier SeasLog.php
         array_shift($backtrace); 
 
         //encore soi-même (fonction appelée de SeasLog)
-        //$r = '#'.__FILE__.'#';
-        $r = '#StdLog.php$#';
-        
+        $r = '#'.__FILE__.'#';
         if(isset($backtrace[0]['file']))
             if( preg_match($r, $backtrace[0]['file']) ) 
                 array_shift($backtrace);
-           
+            
         if(isset($backtrace[0]['file']))
             if( preg_match($r, $backtrace[0]['file']) ) 
                 array_shift($backtrace);
-           
+            
         //use of Helpers
         if(isset($backtrace[0]['file']))
             if( preg_match($r, $backtrace[0]['file']) ) 
                 array_shift($backtrace);
-
+    
         $backtrace_return = ['file'=>'', 'line'=>'', 'function'=>'', 'class'=>''];
          
         // function de définition $backtrace[0]
-        if( isset($backtrace[0]['file']) && isset($backtrace[0]['line']) ) //&& isset($backtrace[0]['function']) )
+        if( isset($backtrace[0]['file']) && isset($backtrace[0]['line']) && isset($backtrace[0]['function']) )
         {
             $backtrace_return['file'] = $backtrace[0]['file'];
             $backtrace_return['line'] = $backtrace[0]['line'];
         }
-        //else return FALSE;
+        else return FALSE;
         
         // function appelante $backtrace[1]
-        if( isset($backtrace[1]['function']) )
+        if( isset($backtrace[1]['function']) && isset($backtrace[1]['class']) )
         {
             $backtrace_return['function'] = $backtrace[1]['function'];
-            //$backtrace_return['class'] = $backtrace[1]['class'];
-        }
-        
-        if( isset($backtrace[1]['class']) )
-        {
-            //$backtrace_return['function'] = $backtrace[1]['function'];
             $backtrace_return['class'] = $backtrace[1]['class'];
         }
-        //else return FALSE;
+        else return FALSE;
 
         return $backtrace_return;
     }
