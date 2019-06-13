@@ -1,12 +1,31 @@
-suites:
-    application_suite:
-        #namespace: admin\module\Application\src\Controller
-        #psr4_prefix: admin\module\Application\src\Controller
-    # src_path: .
+#suites:
+    #application_suite:
+        #namespace: APP
+    #    psr4_prefix: admin/test/
+        #src_path: admin/tesst/
+    #autoload_suite:
+        #namespace: APP
+        #psr4_prefix: admin/test/
+        #src_path: admin/test/
+        
     
 #composer_suite_detection: true
 code_generation: false
 #bootstrap: tests/bootstrap.php
+
+
+
+
+############## PSR4
+#"psr-4": {
+#           "AmazonApi\\": "admin/module/AmazonApi/src/",
+#          }
+
+# admin/module/Application/src/Controller/World.php
+# namespace Application\Controller;
+
+# spec/Application/Controller/WorldSpec.php
+# namespace spec\Application\Controller;
 
 
 
@@ -40,12 +59,31 @@ code_generation: false
 
 
 
+########### WITH CONFIG
+#"autoload": {
+#        "psr-0": {
+#            "APP\\": "admin/test/"
+#        },
+
+# admin/test/APP/World.php
+# namespace APP
+
+# spec/APP/World.php
+# namespace spac/APP;
+
+# application_suite:                    
+#        namespace: APP
+#        src_path: admin/test/
+#################
+
+
+
 
 
 
 #"autoload": {
 #"psr-4": {
-#"tests\Acme\Project\": "tests/"
+    #"tests\Acme\Project\": "tests/"
 #}
 
 #vendor/bin/phpspec desc Acme/Project/Domain/Hello/MyClass
