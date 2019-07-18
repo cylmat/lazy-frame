@@ -18,6 +18,7 @@
         "kint-php/kint": "^3",
         "fzaninotto/faker":"^1.8",
         "mockery/mockery": "^1.2",
+        "overtrue/php-lint": "^1.1",
         "pdepend/pdepend": "^2",
         "phpmd/phpmd": "^2",
         "phpspec/phpspec": "^3",
