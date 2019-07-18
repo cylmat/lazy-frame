@@ -23,6 +23,7 @@
     },
     "require-dev": {
         "brain/monkey": "^2.2",
+        "overtrue/php-lint": "^1.1",
         "peridot-php/peridot": "^1",
         "phpunit/phpunit-skeleton-generator": "*",
         "wp-coding-standards/wpcs": "^2.0"
