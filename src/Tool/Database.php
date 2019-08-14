@@ -13,7 +13,7 @@ class Database
     static function getInstance()
     {
         if(null === self::$instance)
-            self::$instance = new Database;
+            self::$instance = new self;
         return self::$instance;
     }
 
@@ -28,10 +28,11 @@ class Database
             return true;
     }
 
-    function __call($name, $arg)
+    function __call($name, $arg=[])
     {
-        var_dump($this->db);
+        if(!isset($arg[0])) $arg[0] = '';
         if(method_exists($this->db,$name))
-            return $this->db->$name($arg[0]);
+            return $this->db->$name(...$arg);
+        return false;
     }
 }

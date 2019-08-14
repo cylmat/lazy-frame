@@ -18,7 +18,7 @@ class Test
         $back['persos'] = self::getPersos();
 
         self::init();
-        //self::setRepo($back);
+        self::setRepo($back);
         //self::runGame($back);
 
         echo Logger::$log; 
@@ -31,12 +31,14 @@ class Test
         $p1->setName('Alphonse');
         $p1->setLife(100);
         $p1->setClass('Warrior');
+        $p1->setLevel(3);
         $p1->setForce(3);
 
         $p2 = new PersoEntity;
         $p2->setId(2);
         $p2->setName('Bob');
         $p2->setLife(100);
+        $p2->setLevel(4);
         $p2->setClass('Mage');
         $p2->setForce(4);
 
@@ -49,15 +51,36 @@ class Test
         try {
             $_access = $db->setDataAccess( new PDO('mysql:host=localhost;dbname=game','root','root') );
         } catch(PDOException $e) {echo $e;}
-
         Logger::assert($_access===true, 'Init db');
+
+        $persoRepo = new PersoRepository( Database::getInstance() );
+        Logger::assert($persoRepo->createDatabase()!==false, 'Create PersoRepo');
     }
 
     static function setRepo($back)
     {
         $p1 = $back['persos'][0];
         $persoRepo = new PersoRepository( Database::getInstance() );
-        $persoRepo->insert($p1);
+        $persoRepo->create($p1);
+        $last = $persoRepo->getLastInsertId();
+        Logger::assert($last>0, 'Perso bien crée dans BDD');
+
+        //get
+        $persoCreated = $persoRepo->getFromId($last);
+        Logger::assert('PersoEntity'===get_class($persoCreated), 'Perso récupéré');
+
+        //update
+        $ok = $persoRepo->update($persoCreated, ['force'=>7]);
+        Logger::assert($ok!==false, 'Perso update');
+        $persoCreated = $persoRepo->getFromId($last);
+        Logger::assert('7'===$persoCreated->getForce(), 'Perso update force 7');
+
+        //print_r($persoCreated);
+        //list
+        //:$persos = $persoRepo->list();` `
+
+        //clean
+        $persoRepo->deleteId( $last );
     }
 
     static function runGame($back)
@@ -68,7 +91,7 @@ class Test
 
         $perso1->attack( $perso2 );
         Logger::assert(100===$perso1->get()->getLife(), 'Perso1');
-        Logger::assert(97===$perso1->get()->getLife(), 'Perso1');
+        Logger::assert(97===$perso1->get()->getLife(), 'Perso2');
     }
 }
 
