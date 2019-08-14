@@ -10,7 +10,7 @@ require APP_ROOT.'app/autoload.php';
 /**
  * Test
  */
-class Test 
+class TestPerso
 {
     static function run()
     {
@@ -19,7 +19,6 @@ class Test
 
         self::init();
         self::setRepo($back);
-        //self::runGame($back);
 
         echo Logger::$log; 
     }
@@ -75,9 +74,9 @@ class Test
         $persoCreated = $persoRepo->getFromId($last);
         Logger::assert('7'===$persoCreated->getForce(), 'Perso update force 7');
 
-        //print_r($persoCreated);
         //list
-        //:$persos = $persoRepo->list();` `
+        $persos = $persoRepo->list();
+        Logger::assert(is_array($persos), 'Persos list');
 
         //clean
         $persoRepo->deleteId( $last );
@@ -95,4 +94,4 @@ class Test
     }
 }
 
-Test::run();
+TestPerso::run();

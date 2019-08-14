@@ -1,5 +1,7 @@
 <?php
 
+
+
 class PersoRepository
 {
     private $db;
@@ -15,6 +17,9 @@ class PersoRepository
         return (int)$this->db->lastInsertId();
     }
 
+    /**
+     * Create
+     */
     public function create( PersoEntity $perso ): bool
     {
         $sql = "
@@ -33,6 +38,9 @@ VALUES (:name, :life, :class, :level, :force);
         return $smt->execute($params);
     }
 
+    /**
+     * Update
+     */
     public function update(PersoEntity $perso, array $newParams): bool
     {
         $this->hydrate($perso, $newParams);
@@ -56,6 +64,9 @@ WHERE id=:id;
         return $smt->execute($params);
     }
 
+    /**
+     * Get
+     */
     public function getFromId( int $id ): ?PersoEntity
     {
         $sql = "SELECT * FROM ".self::PERSO_DB." WHERE id={$id}";
@@ -70,11 +81,32 @@ WHERE id=:id;
         return null;
     }
 
+    /**
+     * List
+     */
     public function list()
     {
+        $sql = "SELECT * FROM ".self::PERSO_DB."";
+        $smt = $this->db->prepare($sql);
+        $ret = $smt->execute();
+        $list = [];
 
+        if($ret)
+        {
+            foreach($smt->fetchAll() as $n => $persoVars)
+            {
+                $perso = new PersoEntity();
+                $this->hydrate( $perso, $persoVars );
+                $list[] = $perso;
+            }
+            return $list;
+        }
+        return null;
     }
 
+    /**
+     * Delete
+     */
     public function deleteId($id)
     {
         $delete_sql = "

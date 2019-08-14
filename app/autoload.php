@@ -8,7 +8,8 @@ class LazyLoad
     public static function load()
     {
         self::$ini = parse_ini_file(APP_ROOT.'app/config/config.ini', true);
-        self::parse(self::$ini['APP']['src_path']);
+        $path = APP_ROOT.self::$ini['APP']['src_path'];
+        self::parse($path);
     }
 
     public static function parse($dir)
