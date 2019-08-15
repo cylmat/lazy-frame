@@ -2,5 +2,5 @@
 
 interface TemplateInterface
 {
-    function parse(string $content);
+    function parse(array $params);
 }

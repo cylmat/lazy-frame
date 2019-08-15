@@ -4,19 +4,12 @@ class Application
 {
     use SingletonTrait;
 
-    private $components=[];
+    /**
+     * 
+     */
+    public $components=[];
 
-    static function run()
-    {
-        self::getInstance();
-    }
-
-    public function getComponent(string $name)
-    {
-        if(isset($this->components[$name]))
-            return $this->components[$name];
-        return false;
-    }
+    public static $config;
 
     private function __construct()
     {
@@ -24,15 +17,32 @@ class Application
         $this->runningApplication();
     }
 
+    /**
+     * 
+     */
+    static function run()
+    {
+        self::getInstance();
+    }
+
+    /**
+     * 
+     */
+    public function getComponent(string $name)
+    {
+        if(isset($this->components[$name]))
+            return $this->components[$name];
+        return false;
+    }
+
     private function loadComponents()
     {
+        self::$config = parse_ini_file(APP_ROOT.'app/config/config.ini', true);
+
         $this->append(new HttpRequest(), 'HttpRequest');
         $this->append(new HttpResponse(), 'HttpResponse');
         $this->append(new Router(), 'Router');
-        //$this->append(new Controller(), 'Controller');
-        //$this->append(new Database(), 'Database');
-        //$this->append(new Entity(), 'Entity');
-        //$this->append(new Repository(), 'Repository');
+        $this->append(new Template(), 'Template');
     }
 
     /**
@@ -41,10 +51,6 @@ class Application
     private function runningApplication()
     {
         $router = $this->getComponent('Router');
-        //$router->getRoute();
-        //$controller = $this->getController($route);
-        //$action = $this->getAction($route);
-
         $this->action($router->getController(), $router->getAction());
     }
 
@@ -53,19 +59,19 @@ class Application
      */
     private function action(string $controller, string $action)
     {
-        $controller = ucfirst('default');
-        $action = strtolower('index').'Action';
-
         //ctrl
-        $controller = $controller.'Controller';
+        $controller = ucfirst($controller.'Controller');
+        
         $ctrl = new $controller;
+        $act = strtolower($action).'Action';
 
         //action
-        if(method_exists($ctrl, $action))
-            $vue = $ctrl->$action();
-        else {
-            echo "L'action '$action' de $controller n'exists pas";
-        }
+        if(method_exists($ctrl, $act)) {
+            $ctrl->setView($action);
+            $ctrl->$act();
+            $vue = $ctrl->getPage();
+        } else 
+            throw new BadMethodCallException("L'action '$action' de $controller n'exists pas");
 
         if(is_string($vue))
             if(!empty($vue))
@@ -82,10 +88,4 @@ class Application
         $component->inject($this);
         $this->components[$name] = $component;
     }
-
-    /*private function getRoute()
-    {
-        $router = $this->getComponent('Router');
-        return $router->getRoute();
-    }*/
 }

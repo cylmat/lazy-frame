@@ -21,9 +21,4 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
     {
 
     }
-
-    function getPage()
-    {
-
-    }
 }

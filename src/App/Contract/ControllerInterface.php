@@ -2,5 +2,5 @@
 
 interface ControllerInterface
 {
-    function render();
+    function render(string $html);
 }
