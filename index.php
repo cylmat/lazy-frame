@@ -7,6 +7,6 @@ define('APP_ROOT', __DIR__.'/');
 
 require APP_ROOT.'app/autoload.php';
 
-//Router::route();
+Application::run();
 
 echo Logger::$log;
