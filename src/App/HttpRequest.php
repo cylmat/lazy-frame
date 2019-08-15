@@ -15,24 +15,19 @@
     'PHP_SELF' => '/tests/testRouter.php'
 ];*/
 
-class HttpRequest implements ApplicationComponent, HttpRequestInterface
+class HttpRequest extends ApplicationComponentAbstract implements HttpRequestInterface
 {
     private $get, $post;
 
     function __construct()
     {
-        $this->initParams();
-    }
-
-    function inject(Application $App)
-    {
-
+        //$this->initParams();
     }
 
     /**
      * Private
      */
-    private function initParams()
+    /*private function initParams()
     {
         $string = $this->getQueryString();
         $params = explode('&', $string);
@@ -43,19 +38,34 @@ class HttpRequest implements ApplicationComponent, HttpRequestInterface
             $params[$k]=$v;
         }
         $this->get = $params;
-    }
+    }*/
 
+    /**
+     * TODO secure
+     */
     function get()
     {
-        return $this->get;
+        //return $this->get;
+        return $_GET;
     }
 
+    /**
+     * TODO secure
+     */
     function post()
     {
-        return $this->post;
+        return $_POST;
     }
 
-    function getRequestUri()
+    /**
+     * TODO secure
+     */
+    function cookie()
+    {
+        return $_COOKIE;
+    }
+
+    function getRequestUri():string
     {
         //REQUEST_URI
         return self::gettingValue('REQUEST_URI');
@@ -72,7 +82,7 @@ class HttpRequest implements ApplicationComponent, HttpRequestInterface
         return self::gettingValue('SERVER_PROTOCOL');
     }
 
-    function getMethod()
+    function getMethod():string
     {
         //REQUEST_METHOD
         return self::gettingValue('REQUEST_METHOD');

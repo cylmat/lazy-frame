@@ -1,6 +1,6 @@
 <?php
 
-interface ApplicationComponent
+interface ApplicationComponentInterface 
 {
     function inject(Application $app);
 }

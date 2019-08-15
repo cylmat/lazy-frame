@@ -3,35 +3,25 @@
 /**
  * Router
  */
-class Router
+class Router extends ApplicationComponentAbstract implements RouterInterface
 {
-    use SingletonTrait;
-
-    static function route()
-    {
-        $self = self::getInstance();
-        $response = new HttpResponse;
-        $ctrl = $self->getControllerName($response);
-    }
-
-    private function getControllerParams(HttpResponse $response)
+    function getControllerParams()
     {
 
     }
 
-    private function getControllerName(HttpResponse $response): string
+    function getControllerName( ): string
     {
-        //check if controller exists
-        var_dump($response->get());
+      
     }
 
-    private function redirectToController()
+    function setAction(string $action)
     {
 
     }
 
-    /*function getRequest()
+    function setController(ControllerInterface $controller)
     {
-
-    }*/
+        
+    }
 }

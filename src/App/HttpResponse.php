@@ -1,10 +1,20 @@
 <?php
 
-class HttpResponse implements ApplicationComponent, HttpResponseInterfce
+class HttpResponse extends ApplicationComponentAbstract implements HttpResponseInterface
 {
-    function inject(Application $app)
+    function redirect(string $url, int $code)
     {
 
+    }
+
+    function setCookie(array $params)
+    {
+
+    }
+
+    function setPage()
+    {
+        
     }
 
     function setSession()
