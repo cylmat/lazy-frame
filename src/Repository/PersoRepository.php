@@ -1,29 +1,14 @@
 <?php
 
-
-
-class PersoRepository
-{
-    private $db;
-    const PERSO_DB = 'Perso';
-
-    public function __construct( Database $db )
-    {
-        $this->db = $db;
-    }
-
-    public function getLastInsertId(): int
-    {
-        return (int)$this->db->lastInsertId();
-    }
-
+class PersoRepository extends Repository
+{   
     /**
      * Create
      */
     public function create( PersoEntity $perso ): bool
     {
         $sql = "
-INSERT INTO ".self::PERSO_DB." (name, life, class, level, `force`)
+INSERT INTO ".$this->DB_NAME." (name, life, class, level, `force`)
 VALUES (:name, :life, :class, :level, :force);
 ";
 
@@ -46,7 +31,7 @@ VALUES (:name, :life, :class, :level, :force);
         $this->hydrate($perso, $newParams);
         
         $sql = "
-UPDATE ".self::PERSO_DB." 
+UPDATE ".$this->DB_NAME." 
 SET name=:name, life=:life, class=:class, level=:level, `force`=:force
 WHERE id=:id;
 ";
@@ -67,9 +52,9 @@ WHERE id=:id;
     /**
      * Get
      */
-    public function getFromId( int $id ): ?PersoEntity
+    public function getFromId( int $id ): ?object
     {
-        $sql = "SELECT * FROM ".self::PERSO_DB." WHERE id={$id}";
+        $sql = "SELECT * FROM ".$this->DB_NAME." WHERE id={$id}";
         $smt = $this->db->prepare($sql);
         $ret = $smt->execute();
 
@@ -84,9 +69,9 @@ WHERE id=:id;
     /**
      * List
      */
-    public function list()
+    public function list(): ?array
     {
-        $sql = "SELECT * FROM ".self::PERSO_DB."";
+        $sql = "SELECT * FROM ".$this->DB_NAME."";
         $smt = $this->db->prepare($sql);
         $ret = $smt->execute();
         $list = [];
@@ -107,10 +92,10 @@ WHERE id=:id;
     /**
      * Delete
      */
-    public function deleteId($id)
+    public function deleteId($id): bool
     {
         $delete_sql = "
-DELETE FROM ".self::PERSO_DB." 
+DELETE FROM ".$this->DB_NAME." 
 WHERE id=:id
 ";
 
@@ -125,7 +110,7 @@ WHERE id=:id
     public function createDatabase(): bool
     {
         $create_sql = "
-CREATE TABLE IF NOT EXISTS ".self::PERSO_DB." (
+CREATE TABLE IF NOT EXISTS ".$this->DB_NAME." (
 id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 name VARCHAR(100),
 life SMALLINT,
@@ -137,19 +122,5 @@ level INT,
 
         $smt = $this->db->prepare($create_sql);
         return  $smt->execute();
-    }
-
-    /**
-     * Hydrate
-     */
-    private function hydrate( PersoEntity &$perso, array $values ): bool
-    {
-        foreach( $values as $col => $value )
-        {
-            if(!is_string($col)) continue;
-            $setMethod = 'set'.ucfirst($col);
-            $perso->$setMethod($value);
-        }
-        return true;
     }
 }

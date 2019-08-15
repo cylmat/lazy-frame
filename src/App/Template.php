@@ -28,6 +28,8 @@ class Template extends ApplicationComponent implements TemplateInterface
      */
     function parse(array $params)
     {
+        extract($params);
+
         //vue
         ob_start();
         include $this->vue;

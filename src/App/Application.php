@@ -43,6 +43,10 @@ class Application
         $this->append(new HttpResponse(), 'HttpResponse');
         $this->append(new Router(), 'Router');
         $this->append(new Template(), 'Template');
+
+        $database = Database::getInstance();
+        $database->setDataAccess( new PDO('mysql:host=localhost;dbname=game','root','root') );
+        $this->append($database, 'Database');
     }
 
     /**
@@ -61,8 +65,9 @@ class Application
     {
         //ctrl
         $controller = ucfirst($controller.'Controller');
-        
+
         $ctrl = new $controller;
+        $this->append($ctrl, $controller);
         $act = strtolower($action).'Action';
 
         //action

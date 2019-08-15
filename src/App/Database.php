@@ -1,14 +1,12 @@
 <?php
 
-class Database
+class Database extends ApplicationComponent
 {
     private static $instance=null;
     private $db=null;
 
-    private function __construct() 
-    {
-
-    }
+    private function __construct() {}
+    private function __clone() {}
 
     static function getInstance()
     {
@@ -17,7 +15,6 @@ class Database
         return self::$instance;
     }
 
-    private function __clone() {}
 
     /**
      * $manager: PDO, mysqli, etc...

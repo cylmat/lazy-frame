@@ -1,6 +1,6 @@
 <?php
 
-abstract class Controller implements ControllerInterface
+abstract class Controller extends ApplicationComponent implements ControllerInterface
 {
     const VIEW_EXT = '.html.php';
 

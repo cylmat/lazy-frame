@@ -2,11 +2,14 @@
 
 class PersoController extends Controller
 {
-    function indexAction() 
+    function biduleAction() 
     { 
-        $params = ['hector'=>'boulliez'];
-        $this->renderVue(
-            $params
-        );
+        $persoRepo = new PersoRepository( $this->getComponent('Database') );
+        $list = $persoRepo->list();
+
+        $this->renderVue([
+            'hector'=>'boulliez',
+            'list'=>$list
+        ]);
     }
 }
