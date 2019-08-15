@@ -1,6 +1,6 @@
 <?php
 
-abstract class ApplicationComponentAbstract implements ApplicationComponentInterface
+abstract class ApplicationComponent implements ApplicationComponentInterface
 {
     private $application;
 

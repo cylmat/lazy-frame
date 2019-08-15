@@ -3,25 +3,29 @@
 /**
  * Router
  */
-class Router extends ApplicationComponentAbstract implements RouterInterface
+class Router extends ApplicationComponent implements RouterInterface
 {
-    function getControllerParams()
+    /*function getController()
     {
 
-    }
+    }*/
 
-    function getControllerName( ): string
+    function getController( ): string
     {
-      
+        return '';
     }
 
-    function setAction(string $action)
+    function getAction(): string
     {
-
+        return '';
     }
 
-    function setController(ControllerInterface $controller)
+    /*function setController(ControllerInterface $controller)
     {
         
-    }
+    }*/
+    /*function getRoute()
+    {
+        
+    }*/
 }

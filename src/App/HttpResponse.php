@@ -1,6 +1,6 @@
 <?php
 
-class HttpResponse extends ApplicationComponentAbstract implements HttpResponseInterface
+class HttpResponse extends ApplicationComponent implements HttpResponseInterface
 {
     function redirect(string $url, int $code)
     {

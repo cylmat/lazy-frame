@@ -15,37 +15,20 @@
     'PHP_SELF' => '/tests/testRouter.php'
 ];*/
 
-class HttpRequest extends ApplicationComponentAbstract implements HttpRequestInterface
+class HttpRequest extends ApplicationComponent implements HttpRequestInterface
 {
     private $get, $post;
 
     function __construct()
     {
-        //$this->initParams();
+        
     }
-
-    /**
-     * Private
-     */
-    /*private function initParams()
-    {
-        $string = $this->getQueryString();
-        $params = explode('&', $string);
-
-        foreach($params as $i=>$param) { 
-            list($k, $v) = explode('=', $param); 
-            unset($params[$i]);
-            $params[$k]=$v;
-        }
-        $this->get = $params;
-    }*/
 
     /**
      * TODO secure
      */
     function get()
     {
-        //return $this->get;
         return $_GET;
     }
 
