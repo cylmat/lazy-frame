@@ -1,0 +1,97 @@
+#suites:
+    #application_suite:
+        #namespace: APP
+    #    psr4_prefix: admin/test/
+        #src_path: admin/tesst/
+    #autoload_suite:
+        #namespace: APP
+        #psr4_prefix: admin/test/
+        #src_path: admin/test/
+        
+    
+#composer_suite_detection: true
+code_generation: false
+#bootstrap: tests/bootstrap.php
+
+
+
+
+############## PSR4
+#"psr-4": {
+#           "AmazonApi\\": "admin/module/AmazonApi/src/",
+#          }
+
+# admin/module/Application/src/Controller/World.php
+# namespace Application\Controller;
+
+# spec/Application/Controller/WorldSpec.php
+# namespace spec\Application\Controller;
+
+
+
+
+###########   installation basique
+#composer.json
+#"autoload": {
+#     "psr-0": {
+#         "": "admin/test/chose/"           ex1
+#         "": "admin/test/"                 ex2
+#     },
+
+# spec file: LE NAMESPACE SUIT LE REPERTOIRE DE FICHIER spec\.....
+# class file: LE NAMESPACE SUIT LA SOURCE DE COMPOSER  PSR0\.....
+
+# EX1
+# admin/test/chose/truc/World.php
+# namespace truc;
+
+# spec/truc/WorldSpec.php
+# namespace spec\truc;
+
+
+# EX2
+# admin/test/chose/truc/World.php
+# namespace chose\truc;
+
+# spec/chose/truc/WorldSpec.php
+# namespace spec\chose\truc;
+####################
+
+
+
+########### WITH CONFIG
+#"autoload": {
+#        "psr-0": {
+#            "APP\\": "admin/test/"
+#        },
+
+# admin/test/APP/World.php
+# namespace APP
+
+# spec/APP/World.php
+# namespace spac/APP;
+
+# application_suite:                    
+#        namespace: APP
+#        src_path: admin/test/
+#################
+
+
+
+
+
+
+#"autoload": {
+#"psr-4": {
+    #"tests\Acme\Project\": "tests/"
+#}
+
+#vendor/bin/phpspec desc Acme/Project/Domain/Hello/MyClass
+#spec/Domain/Hello/MyClassSpec.php
+
+#Spec class spec/Acme/Project/Domain/Hello/MyClassSpec.php must be in the base spec 
+#namespace spec/Acme/Project/Tests/
+
+#domain_suite:
+#namespace: Acme\Project\Domain
+#psr4_prefix: Acme\Project
