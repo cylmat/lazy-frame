@@ -36,7 +36,7 @@ abstract class AbstractRepository
 INSERT INTO ".$this->DB_NAME." ({$cols['columns']})
 VALUES ({$cols['bind_values']});
 ";
-var_dump($cols);
+
         $smt = $this->db->prepare($sql);
         return $smt->execute($cols['bind_params']);
     }
@@ -51,21 +51,12 @@ var_dump($cols);
         
         $sql = "
 UPDATE ".$this->DB_NAME." 
-SET name=:name, life=:life, class=:class, level=:level, `force`=:force
-WHERE id=:id;
+SET {$cols['bind_values_noid']}
+WHERE {$cols['bind_values_onlyid']};
 ";
 
         $smt = $this->db->prepare($sql);
-        $params = [
-            ':id'=>$perso->getId(),
-            ':name'=>$perso->getName(),
-            ':life'=>$perso->getLife(),
-            ':class'=>$perso->getClass(),
-            ':level'=>$perso->getLevel(),
-            ':force'=>$perso->getForce()
-        ];
-        
-        return $smt->execute($params);
+        return $smt->execute($cols['bind_params']);
     }
 
     /**
@@ -142,15 +133,14 @@ WHERE id=:id
                 $return['bind_values'] .= ":{$key}$sep"; //bind values
                 $return['bind_params'][':'.$key] = $value;
 
-                if(false===strpos($key,'id')) { //update
-                    $return['bind_values_noid'] .= ":{$key}$sep";
+                if(false===(strstr($key, 'id'))) { //update
+                    $return['bind_values_noid'] .= "{$key}=:{$key}$sep";
                 } else {  
-                    $return['bind_values_onlyid'] .= ":{$key}"; 
+                    $return['bind_values_onlyid'] .= "{$key}=:{$key}"; 
                 }
             }
             $i++;
         }
-            var_dump($return);
 
         return $return;
     }
