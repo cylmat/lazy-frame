@@ -2,8 +2,8 @@
 
 namespace Core\Abstracts;
 
-use Core\Abstracts\ApplicationComponent;
 use Core\Contract\ControllerInterface;
+use Core\Component\ApplicationComponent;
 use Core\Component\Template;
 use Core\Component\Application;
 

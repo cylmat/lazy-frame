@@ -2,7 +2,7 @@
 
 namespace Core\Component;
 
-use Core\Abstracts\ApplicationComponent;
+use Core\Component\ApplicationComponent;
 use Core\Contract\TemplateInterface;
 
 class Template extends ApplicationComponent implements TemplateInterface
