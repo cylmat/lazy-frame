@@ -34,11 +34,11 @@ abstract class AbstractRepository
 
         $sql = "
 INSERT INTO ".$this->DB_NAME." ({$cols['columns']})
-VALUES ({$cols['values']});
+VALUES ({$cols['bind_values']});
 ";
-
+var_dump($cols);
         $smt = $this->db->prepare($sql);
-        return $smt->execute($cols['binds']);
+        return $smt->execute($cols['bind_params']);
     }
 
     /**
@@ -129,25 +129,29 @@ WHERE id=:id
      */
     protected function toColumns($params)
     {
-        $i=0; 
-        $columns = ''; 
-        $values = ''; 
-        $binds = [];
+        $i=1; $return=[
+            'columns'=>'', 'bind_values'=>'', 'bind_values_noid'=>'', 'bind_values_onlyid'=>'', 'bind_params'=>[]
+        ];
         foreach($params as $key => $value)
         {
             if(!ctype_alpha($key)) {
                 throw new \InvalidArgumentException('Expected alphanumeric value ('.$key.')');
             } else {
-                $columns .= ($i?',':'') . "`{$key}`";
-                $values .= ($i++?',':'') . ":{$key}";
-                $binds[':'.$key] = $value;
-            }
-        }
+                $sep = $i<=count($params)-1?',':'';
+                $return['columns'] .= "`{$key}`$sep"; //columns
+                $return['bind_values'] .= ":{$key}$sep"; //bind values
+                $return['bind_params'][':'.$key] = $value;
 
-        return [
-            'columns'=>$columns,
-            'values' =>$values,
-            'binds' =>$binds
-        ];
+                if(false===strpos($key,'id')) { //update
+                    $return['bind_values_noid'] .= ":{$key}$sep";
+                } else {  
+                    $return['bind_values_onlyid'] .= ":{$key}"; 
+                }
+            }
+            $i++;
+        }
+            var_dump($return);
+
+        return $return;
     }
 }
