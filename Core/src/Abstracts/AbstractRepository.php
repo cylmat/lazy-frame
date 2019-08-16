@@ -30,25 +30,15 @@ abstract class AbstractRepository
      */
     public function create( EntityInterface $entity ): bool
     {
-        $i=0; $columns = ''; $values = ''; $params;
-        foreach($entity->gets() as $key => $value)
-        {
-            if(!ctype_alpha($key)) {
-                throw new \InvalidArgumentException();
-            } else {
-                $columns .= ($i?',':'') . "`{$key}`";
-                $values .= ($i++?',':'') . ":{$key}";
-                $params[':'.$key] = $value;
-            }
-        }
+        $cols = $this->toColumns($entity->gets());
 
         $sql = "
-INSERT INTO ".$this->DB_NAME." ({$columns})
-VALUES ({$values});
+INSERT INTO ".$this->DB_NAME." ({$cols['columns']})
+VALUES ({$cols['values']});
 ";
 
         $smt = $this->db->prepare($sql);
-        return $smt->execute($params);
+        return $smt->execute($cols['binds']);
     }
 
     /**
@@ -57,6 +47,7 @@ VALUES ({$values});
     public function update(EntityInterface $entity, array $newParams): bool
     {
         $this->hydrate($entity, $newParams);
+        $cols = $this->toColumns($entity->gets());
         
         $sql = "
 UPDATE ".$this->DB_NAME." 
@@ -131,5 +122,32 @@ WHERE id=:id
         $smt = $this->db->prepare($delete_sql);
         $smt->bindValue(':id', $id, PDO::PARAM_INT);
         return $smt->execute();
+    }
+
+    /**
+     * 
+     */
+    protected function toColumns($params)
+    {
+        $i=0; 
+        $columns = ''; 
+        $values = ''; 
+        $binds = [];
+        foreach($params as $key => $value)
+        {
+            if(!ctype_alpha($key)) {
+                throw new \InvalidArgumentException('Expected alphanumeric value ('.$key.')');
+            } else {
+                $columns .= ($i?',':'') . "`{$key}`";
+                $values .= ($i++?',':'') . ":{$key}";
+                $binds[':'.$key] = $value;
+            }
+        }
+
+        return [
+            'columns'=>$columns,
+            'values' =>$values,
+            'binds' =>$binds
+        ];
     }
 }

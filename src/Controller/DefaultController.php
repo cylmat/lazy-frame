@@ -14,7 +14,7 @@ class DefaultController extends Controller
         $perso->setName(8);
         $perso->setLife(50);
         $perso->setClass('warrior');
-        $perso->setForce(7);
+        $perso->setForce(8);
        
         $persoRepo = new PersoRepository( $this->getComponent('Database') );
         $r = $persoRepo->create($perso);
