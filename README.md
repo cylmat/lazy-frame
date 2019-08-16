@@ -1,2 +1,2 @@
 # framework
-Functionnal php framework for study project
+Framework php complet pour projet d'étude
