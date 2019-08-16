@@ -1,5 +1,7 @@
 <?php
 
+namespace Core\Traits;
+
 trait SingletonTrait
 {
     private static $instance=null;

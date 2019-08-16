@@ -1,5 +1,10 @@
 <?php
 
+namespace Core\Component;
+
+use Core\Abstracts\ApplicationComponent;
+use Core\Contract\DatabaseInterface;
+
 class Database extends ApplicationComponent
 {
     private static $instance=null;

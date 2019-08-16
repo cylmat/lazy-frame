@@ -1,6 +1,13 @@
 <?php
 
-abstract class Controller extends ApplicationComponent implements ControllerInterface
+namespace Core\Abstracts;
+
+use Core\Abstracts\ApplicationComponent;
+use Core\Contract\ControllerInterface;
+use Core\Component\Template;
+use Core\Component\Application;
+
+abstract class AbstractController extends ApplicationComponent implements ControllerInterface
 {
     const VIEW_EXT = '.html.php';
 
@@ -14,7 +21,6 @@ abstract class Controller extends ApplicationComponent implements ControllerInte
      */
     function render(string $html)
     {
-        //$this->page = new Template();
         $this->page->setRawContent( $html ); 
         return $this->getPage();
     }
@@ -44,7 +50,7 @@ abstract class Controller extends ApplicationComponent implements ControllerInte
         $viewPath = APP_ROOT . Application::$config['APP']['view_path']; 
         $viewPath .= '/'.strtolower(str_replace('Controller','',static::class));
 
-        $templatePath = $viewPath . '/template' . self::VIEW_EXT;
+        $templatePath = $viewPath . '/layout' . self::VIEW_EXT;
         $viewPath .= '/'.$actionName . self::VIEW_EXT;
 
         $this->page->setTemplate($templatePath);

@@ -1,5 +1,7 @@
 <?php
 
+namespace Core\Abstracts;
+
 abstract class Repository
 {
     use HydrateTrait;

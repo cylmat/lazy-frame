@@ -1,5 +1,7 @@
 <?php
 
+namespace Core\Contract;
+
 interface Page
 {
     function params(array $params);

@@ -1,6 +1,14 @@
 <?php
 
-class Application 
+namespace Core\Component;
+
+if(!defined('APP_ROOT')) die("Application non définie");
+
+use Core\Contract\ApplicationInterface;
+use Core\Traits\SingletonTrait;
+use Core\Contract\ApplicationComponentInterface;
+
+class Application implements ApplicationInterface
 {
     use SingletonTrait;
 
@@ -39,13 +47,14 @@ class Application
     {
         self::$config = parse_ini_file(APP_ROOT.'app/config/config.ini', true);
 
-        $this->append(new HttpRequest(), 'HttpRequest');
-        $this->append(new HttpResponse(), 'HttpResponse');
-        $this->append(new Router(), 'Router');
-        $this->append(new Template(), 'Template');
+        $this->append(new \Core\Component\HttpRequest(), 'HttpRequest');
+        $this->append(new \Core\Component\HttpResponse(), 'HttpResponse');
+        $this->append(new \Core\Component\Router(), 'Router');
+        $this->append(new \Core\Component\Template(), 'Template');
+        new \Core\Component\Controller();
 
-        $database = Database::getInstance();
-        $database->setDataAccess( new PDO('mysql:host=localhost;dbname=game','root','root') );
+        $database = \Core\Component\Database::getInstance();
+        $database->setDataAccess( new \PDO('mysql:host=localhost;dbname=game','root','root') );
         $this->append($database, 'Database');
     }
 
@@ -64,7 +73,7 @@ class Application
     private function action(string $controller, string $action)
     {
         //ctrl
-        $controller = ucfirst($controller.'Controller');
+        $controller = 'Controller\\'.ucfirst($controller.'Controller');
 
         $ctrl = new $controller;
         $this->append($ctrl, $controller);
@@ -76,7 +85,7 @@ class Application
             $ctrl->$act();
             $vue = $ctrl->getPage();
         } else 
-            throw new BadMethodCallException("L'action '$action' de $controller n'exists pas");
+            throw new \BadMethodCallException("L'action '$action' de $controller n'exists pas");
 
         if(is_string($vue))
             if(!empty($vue))

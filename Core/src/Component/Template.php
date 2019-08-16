@@ -1,5 +1,10 @@
 <?php
 
+namespace Core\Component;
+
+use Core\Abstracts\ApplicationComponent;
+use Core\Contract\TemplateInterface;
+
 class Template extends ApplicationComponent implements TemplateInterface
 {
     private $template;
@@ -9,7 +14,7 @@ class Template extends ApplicationComponent implements TemplateInterface
     function setTemplate(string $templatePath)
     {
         if(!file_exists($templatePath))
-            throw new InvalidArgumentException("Le fichier de template n'existe pas.");
+            throw new \InvalidArgumentException("Le fichier $templatePath n'existe pas.");
 
         $this->template = $templatePath;
     }
@@ -17,7 +22,7 @@ class Template extends ApplicationComponent implements TemplateInterface
     function setVue(string $viewPath)
     {
         if(!file_exists($viewPath))
-            throw new InvalidArgumentException("Le fichier de vue n'existe pas.");
+            throw new \InvalidArgumentException("Le fichier $viewPath n'existe pas.");
         
         $this->vue = $viewPath;
     }

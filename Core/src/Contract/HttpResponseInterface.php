@@ -1,5 +1,7 @@
 <?php
 
+namespace Core\Contract;
+
 interface HttpResponseInterface
 {
     function redirect(string $url, int $code);

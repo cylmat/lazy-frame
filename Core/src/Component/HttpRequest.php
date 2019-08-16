@@ -1,20 +1,28 @@
 <?php
 
-/*$newServer = [
-    'HTTP_HOST' => 'web:8888',
-    'HTTP_ACCEPT_LANGUAGE' => 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
-    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
-    'SERVER_NAME' => 'web', //SERVER_PORT
-    'REQUEST_SCHEME' => 'http sgdfgd',
-    'SCRIPT_FILENAME' => 'D:/web-server/web/tests/testRouter.php',
-    'SERVER_PROTOCOL' => 'HTTP/1.1',
-    'REQUEST_METHOD' => 'GET',
-    'QUERY_STRING' => 'ctrl=alpha&test=unit&uniq=45',
-    'REQUEST_URI' => '/tests/testRouter.php?ctrl=alpha&test=unit&uniq=45',
-    'SCRIPT_NAME' => '/tests/testRouter.php',
-    'PHP_SELF' => '/tests/testRouter.php'
-];*/
+namespace Core\Component;
 
+use Core\Abstracts\ApplicationComponent;
+use Core\Contract\HttpRequestInterface;
+
+/*
+    Class HttpRequest
+    
+    [
+        'HTTP_HOST' => 'web:8888',
+        'HTTP_ACCEPT_LANGUAGE' => 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
+        'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+        'SERVER_NAME' => 'web', //SERVER_PORT
+        'REQUEST_SCHEME' => 'http sgdfgd',
+        'SCRIPT_FILENAME' => 'D:/web-server/web/tests/testRouter.php',
+        'SERVER_PROTOCOL' => 'HTTP/1.1',
+        'REQUEST_METHOD' => 'GET',
+        'QUERY_STRING' => 'ctrl=alpha&test=unit&uniq=45',
+        'REQUEST_URI' => '/tests/testRouter.php?ctrl=alpha&test=unit&uniq=45',
+        'SCRIPT_NAME' => '/tests/testRouter.php',
+        'PHP_SELF' => '/tests/testRouter.php'
+    ];
+*/
 class HttpRequest extends ApplicationComponent implements HttpRequestInterface
 {
     private $get, $post;

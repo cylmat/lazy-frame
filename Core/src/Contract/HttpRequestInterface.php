@@ -1,5 +1,7 @@
 <?php
 
+namespace Core\Contract;
+
 interface HttpRequestInterface
 {
     function get();
