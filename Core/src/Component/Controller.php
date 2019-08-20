@@ -12,15 +12,15 @@ class Controller extends ApplicationComponent implements ControllerInterface
     /**
      * Template object
      */
-    protected $template = null; 
+    private $_template = null; 
 
     /**
      * Render pur html string
      */
     function renderRaw(string $html)
     {
-        $this->template->setRawContent($html); 
-        return $this->template->getPage();
+        $this->_template->setRawContent($html); 
+        return $this->_template->getPage();
     }
 
     /**
@@ -28,15 +28,15 @@ class Controller extends ApplicationComponent implements ControllerInterface
      */
     function renderVue(array $params=[])
     {
-        return $this->template->getPage($params);
+        return $this->_template->getPage($params);
     }
 
     function setView(string $actionName)
     {
-        $this->template = new Template();
+        $this->_template = new Template();
 
         $controllerName = explode(DIR_SEP, static::class);
-        if(count($controllerName)!==3) {
+        if (count($controllerName)!==3) {
             throw new \Exception("Controller name invalid");
             return false;
         }
@@ -50,12 +50,12 @@ class Controller extends ApplicationComponent implements ControllerInterface
             DIR_SEP . strtolower(str_replace('Controller', '', $controllerName[2])) . 
             DIR_SEP . $actionName . Application::$config->view->file_ext;
 
-        $this->template->setTemplate($templatePath);
-        $this->template->setVue($viewPath);
+        $this->_template->setTemplate($templatePath);
+        $this->_template->setVue($viewPath);
     }
 
     function getPage():string
     {
-        return $this->template->getPage();
+        return $this->_template->getPage();
     }
 }

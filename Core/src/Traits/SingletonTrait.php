@@ -29,9 +29,9 @@ trait SingletonTrait
      */
     static function getInstance()
     {
-        if (self::$instance===null) {
-            self::$instance = new self;
+        if (self::$_instance===null) {
+            self::$_instance = new self;
         }
-        return self::$instance;
+        return self::$_instance;
     }
 }

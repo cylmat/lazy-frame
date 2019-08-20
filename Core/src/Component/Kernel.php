@@ -25,7 +25,7 @@ class Kernel extends ApplicationComponent
         $act = strtolower($action).'Action';
 
         //action
-        if(method_exists($ctrl, $act)) {
+        if (method_exists($ctrl, $act)) {
             $ctrl->setView($action);
             $ctrl->$act();
             $this->httpResponse->setPage($ctrl->getPage());

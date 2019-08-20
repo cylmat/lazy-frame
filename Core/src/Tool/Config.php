@@ -4,7 +4,7 @@ namespace Core\Tool;
 
 class Config
 {
-    private static $config;
+    private static $_config;
 
     private function __construct()
     {
@@ -15,7 +15,7 @@ class Config
 
     public static function get(string $configPath): Config
     {
-        if(!file_exists($configPath)) {
+        if (!file_exists($configPath)) {
             throw new \InvalidArgumentException("File $configPath doesn't exists");
             return false;
         }
@@ -27,8 +27,8 @@ class Config
     public function __get(string $name)
     {
         $name = strtoupper($name);
-        if(isset(self::$config[$name])) { 
-            return (object)self::$config[$name];
+        if (isset(self::$_config[$name])) { 
+            return (object)self::$_config[$name];
         }
 
         throw new \InvalidArgumentException("Argument $name doesn't exists"); 

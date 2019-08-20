@@ -2,7 +2,8 @@
 
 namespace Core\Component;
 
-if(!defined('APP_ROOT')) { die("Application non définie");
+if (!defined('APP_ROOT')) {
+    die("Application non définie");
 }
 
 use Core\Contract\ApplicationInterface;
@@ -23,25 +24,27 @@ class Application extends ApplicationComponent implements ApplicationInterface
     ];
 
     /**
+     * Application components
      * 
+     * @var array
      */
     public $components=[];
 
     /**
-     * @var Config
+     * Public configuration
      * 
-     * public configuration
+     * @var Config
      */
     public static $config;
 
     private function __construct()
     {
-        $this->loadComponents();
-        $this->runningKernelApplication();
+        $this->_loadComponents();
+        $this->_runningKernelApplication();
     }
 
     /**
-     * 
+     * Launch application
      */
     public static function run( Config $config )
     {
@@ -52,18 +55,18 @@ class Application extends ApplicationComponent implements ApplicationInterface
     /**
      * Load components globally in Lazyloading
      */
-    private function loadComponents()
+    private function _loadComponents()
     {
-        $this->append(new \Core\Component\HttpRequest(), 'HttpRequest');
-        $this->append(new \Core\Component\HttpResponse(), 'HttpResponse');
-        $this->append(new \Core\Component\Kernel(), 'Kernel');
-        $this->append(new \Core\Component\Router(), 'Router');
-        $this->append(new \Core\Component\Template(), 'Template');
+        $this->_append(new \Core\Component\HttpRequest(), 'HttpRequest');
+        $this->_append(new \Core\Component\HttpResponse(), 'HttpResponse');
+        $this->_append(new \Core\Component\Kernel(), 'Kernel');
+        $this->_append(new \Core\Component\Router(), 'Router');
+        $this->_append(new \Core\Component\Template(), 'Template');
         new \Core\Component\Controller();
 
         $database = \Core\Component\Database::getInstance();
         $database->setDataAccess(new \PDO('mysql:host=localhost;dbname=game', 'root', 'root'));
-        $this->append($database, 'Database');
+        $this->_append($database, 'Database');
 
         $this->inject($this);
     }
@@ -71,7 +74,7 @@ class Application extends ApplicationComponent implements ApplicationInterface
     /**
      * RUNNING Kernel Application
      */
-    private function runningKernelApplication()
+    private function _runningKernelApplication()
     {
         $httpResponse = $this->kernel->getResponse(
             $this->router->getModule(),
@@ -84,7 +87,7 @@ class Application extends ApplicationComponent implements ApplicationInterface
     /**
      *  TODO: collection
      */
-    private function append(ApplicationComponentInterface $component, $name)
+    private function _append(ApplicationComponentInterface $component, $name)
     {
         $component->inject($this);
         $this->components[$name] = $component;

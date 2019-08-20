@@ -15,7 +15,7 @@ class Entity implements EntityInterface
     }
 
     /**
-     * Evite la lourdeur d'implémentation d'un Iterator
+     * Récupere les propriétés
      */
     function gets()
     {
@@ -24,17 +24,16 @@ class Entity implements EntityInterface
 
     function __call($name, $arg)
     {
-        if(preg_match('/set(.*)/', $name, $propName)) {
+        if (preg_match('/set(.*)/', $name, $propName)) {
             $propName = strtolower($propName[1]);
-            if(property_exists($this, $propName)) {
+            if (property_exists($this, $propName)) {
                 $this->$propName = $arg[0];
                 return true;
             }
             return false;
-        }
-        elseif(preg_match('/get(.*)/', $name, $propName)) {
+        } elseif (preg_match('/get(.*)/', $name, $propName)) {
             $propName = strtolower($propName[1]);
-            if(property_exists($this, $propName)) {
+            if (property_exists($this, $propName)) {
                 return $this->$propName;
             }
             return null;

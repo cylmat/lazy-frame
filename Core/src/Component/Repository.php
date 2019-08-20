@@ -70,7 +70,7 @@ WHERE {$cols['bind_values_onlyid']};
         $ret = $smt->execute();
 
         $entity = $this->entityName;
-        if($ret) {
+        if ($ret) {
             $perso = new $entity();
             $this->hydrate($perso, $smt->fetchAll()[0]);
             return $perso;
@@ -88,9 +88,8 @@ WHERE {$cols['bind_values_onlyid']};
         $ret = $smt->execute();
         $list = [];
 
-        if($ret) {
-            foreach($smt->fetchAll() as $n => $persoVars)
-            {
+        if ($ret) {
+            foreach ($smt->fetchAll() as $n => $persoVars) {
                 $perso = new PersoEntity();
                 $this->hydrate($perso, $persoVars);
                 $list[] = $perso;
@@ -120,16 +119,18 @@ WHERE id=:id
     }
 
     /**
+     * Change results to columns data
      * 
+     * Ex:  id,name,class
+     *      id=:id, name=:name, ...
      */
     protected function toColumns($params)
     {
         $i=1; $return=[
             'columns'=>'', 'bind_values'=>'', 'bind_values_noid'=>'', 'bind_values_onlyid'=>'', 'bind_params'=>[]
         ];
-        foreach($params as $key => $value)
-        {
-            if(!ctype_alpha($key)) {
+        foreach ($params as $key => $value) {
+            if (!ctype_alpha($key)) {
                 throw new \InvalidArgumentException('Expected alphanumeric value ('.$key.')');
             } else {
                 $sep = $i<=count($params)-1?',':'';
@@ -137,7 +138,7 @@ WHERE id=:id
                 $return['bind_values'] .= ":{$key}$sep"; //bind values
                 $return['bind_params'][':'.$key] = $value;
 
-                if(false===(strstr($key, 'id'))) { //update
+                if (false===(strstr($key, 'id'))) { //update
                     $return['bind_values_noid'] .= "{$key}=:{$key}$sep";
                 } else {  
                     $return['bind_values_onlyid'] .= "{$key}=:{$key}"; 

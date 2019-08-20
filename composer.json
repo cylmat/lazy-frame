@@ -18,7 +18,7 @@
     },
     "scripts": {
         "test": "phpunit",
-        "check": "phpcs",
+        "cs": "phpcs",
         "fix": "phpcbf",
         "md": "phpmd Core text cleancode, codesize, controversial, design, naming, unusedcode"
     }

@@ -12,22 +12,22 @@ use Core\Contract\TemplateInterface;
  */
 class Template extends ApplicationComponent implements TemplateInterface
 {
-    private $template;
-    private $vue;
-    private $generatedPage='';
+    private $_template;
+    private $_vue;
+    private $_generatedPage='';
 
     function setTemplate(string $templatePath)
     {
-        if(!file_exists($templatePath)) {
-            $this->template = '';
+        if (!file_exists($templatePath)) {
+            $this->_template = '';
         } else {
-            $this->template = $templatePath;
+            $this->_template = $templatePath;
         }
     }
 
     function setVue(string $viewPath)
     {
-        if(!file_exists($viewPath)) {
+        if (!file_exists($viewPath)) {
             throw new \InvalidArgumentException("Le fichier $viewPath n'existe pas.");
         }
         
@@ -37,7 +37,7 @@ class Template extends ApplicationComponent implements TemplateInterface
     
     function setRawContent(string $content)
     {
-        $this->generatedPage = html_entity_decode($$content, ENT_COMPAT, 'UTF-8');
+        $this->_generatedPage = html_entity_decode($$content, ENT_COMPAT, 'UTF-8');
     }
 
     /**
@@ -45,31 +45,31 @@ class Template extends ApplicationComponent implements TemplateInterface
      */
     function getPage(array $params=[]): string
     {
-        $this->parse($params);
-        return $this->generatedPage;
+        $this->_parse($params);
+        return $this->_generatedPage;
     }
 
     /**
      * Parse a Html string
      * Insert params into
      */
-    private function parse(array $params)
+    private function _parse(array $params)
     {
         extract($params);
 
         //vue
         ob_start();
-        include $this->vue;
+        include $this->_vue;
         $content = ob_get_contents();
         ob_end_clean();
 
         //template
-        if(file_exists($this->template)) {
+        if (file_exists($this->_template)) {
             ob_start();
-            include $this->template;
+            include $this->_template;
             $content = ob_get_contents();
             ob_end_clean();
         }
-        $this->generatedPage = $content;
+        $this->_generatedPage = $content;
     }
 }

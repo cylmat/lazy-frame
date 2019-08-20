@@ -8,9 +8,11 @@ use Core\Contract\HttpResponseInterface;
 class HttpResponse extends ApplicationComponent implements HttpResponseInterface
 {
     /**
+     * Html page to be displayed
+     * 
      * @var string
      */
-    private $page;
+    private $_page;
 
     function redirect(string $url, int $code)
     {
@@ -24,7 +26,7 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
 
     function setPage(string $page)
     {
-        $this->page = $page;
+        $this->_page = $page;
     }
 
     function setSession()
@@ -37,8 +39,8 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
      */
     function send(): ?string
     {
-        if(is_string($this->page)) {
-            echo ( $this->page );
+        if (is_string($this->_page)) {
+            echo ( $this->_page );
         }
         return null; 
     }
