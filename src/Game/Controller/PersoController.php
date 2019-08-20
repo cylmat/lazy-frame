@@ -10,7 +10,7 @@ class PersoController extends Controller
     { 
         //$persoRepo = new PersoRepository( $this->getComponent('Database') );
         //$list = $persoRepo->list();
-$list=[];
+        $list=[];
         $this->renderVue([
             'hector'=>'boulliez',
             'list'=>$list

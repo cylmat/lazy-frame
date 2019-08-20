@@ -95,8 +95,9 @@ class HttpRequest extends ApplicationComponent implements HttpRequestInterface
      */
     static function gettingValue($val)
     {
-        if(isset($_SERVER[$val]))
+        if(isset($_SERVER[$val])) {
             return filter_input(INPUT_SERVER, $val, FILTER_SANITIZE_STRING);
+        }
         return $val;
     }
 }

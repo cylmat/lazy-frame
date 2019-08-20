@@ -9,8 +9,9 @@ trait GetterTrait
 {
     public function __get($name)
     {
-        if(property_exists($this,$name))
+        if(property_exists($this, $name)) {
             return $this->$name;
+        }
         
         throw new \InvalidArgumentException("La propriété $name n'existe pas");
         return false;
@@ -18,8 +19,9 @@ trait GetterTrait
 
     public function __set($name, $value): bool
     {
-        if($this->$name = $value)
+        if($this->$name = $value) {
             return true;
+        }
         return false;
     }
 }

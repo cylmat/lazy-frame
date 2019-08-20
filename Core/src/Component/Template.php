@@ -18,16 +18,18 @@ class Template extends ApplicationComponent implements TemplateInterface
 
     function setTemplate(string $templatePath)
     {
-        if(!file_exists($templatePath))
+        if(!file_exists($templatePath)) {
             $this->template = '';
-        else
+        } else {
             $this->template = $templatePath;
+        }
     }
 
     function setVue(string $viewPath)
     {
-        if(!file_exists($viewPath))
+        if(!file_exists($viewPath)) {
             throw new \InvalidArgumentException("Le fichier $viewPath n'existe pas.");
+        }
         
         $this->vue = $viewPath;
     }

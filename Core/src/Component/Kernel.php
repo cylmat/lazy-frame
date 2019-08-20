@@ -28,10 +28,11 @@ class Kernel extends ApplicationComponent
         if(method_exists($ctrl, $act)) {
             $ctrl->setView($action);
             $ctrl->$act();
-            $this->httpResponse->setPage( $ctrl->getPage() );
+            $this->httpResponse->setPage($ctrl->getPage());
             return $this->httpResponse;
-        } else 
+        } else { 
             throw new \BadMethodCallException("L'action '$action' de $module\\$controller n'exists pas");
+        }
 
         return false;
     }

@@ -17,7 +17,7 @@ class Repository implements RepositoryInterface
     public function __construct( Database $db )
     {
         $this->db = $db;
-        $this->DB_NAME = str_replace('Repository','', str_replace('\\','',static::class) );
+        $this->DB_NAME = str_replace('Repository', '', str_replace('\\', '', static::class));
         $this->entityName = $this->DB_NAME.'Entity';
     }
 
@@ -72,7 +72,7 @@ WHERE {$cols['bind_values_onlyid']};
         $entity = $this->entityName;
         if($ret) {
             $perso = new $entity();
-            $this->hydrate( $perso, $smt->fetchAll()[0] );
+            $this->hydrate($perso, $smt->fetchAll()[0]);
             return $perso;
         }
         return null;
@@ -88,12 +88,11 @@ WHERE {$cols['bind_values_onlyid']};
         $ret = $smt->execute();
         $list = [];
 
-        if($ret)
-        {
+        if($ret) {
             foreach($smt->fetchAll() as $n => $persoVars)
             {
                 $perso = new PersoEntity();
-                $this->hydrate( $perso, $persoVars );
+                $this->hydrate($perso, $persoVars);
                 $list[] = $perso;
             }
             return $list;
@@ -116,7 +115,9 @@ WHERE id=:id
         return $smt->execute();
     }
 
-    function createDatabase(): bool {}
+    function createDatabase(): bool
+    {
+    }
 
     /**
      * 

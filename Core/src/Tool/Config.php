@@ -6,8 +6,12 @@ class Config
 {
     private static $config;
 
-    private function __construct() {}
-    private function __clone() {}
+    private function __construct()
+    {
+    }
+    private function __clone()
+    {
+    }
 
     public static function get(string $configPath): Config
     {
@@ -23,8 +27,9 @@ class Config
     public function __get(string $name)
     {
         $name = strtoupper($name);
-        if(isset(self::$config[$name])) 
+        if(isset(self::$config[$name])) { 
             return (object)self::$config[$name];
+        }
 
         throw new \InvalidArgumentException("Argument $name doesn't exists"); 
         return false;

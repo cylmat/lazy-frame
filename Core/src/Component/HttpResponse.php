@@ -37,8 +37,9 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
      */
     function send(): ?string
     {
-        if(is_string($this->page))
+        if(is_string($this->page)) {
             echo ( $this->page );
+        }
         return null; 
     }
 }

@@ -21,8 +21,9 @@ class ApplicationComponent implements ApplicationComponentInterface
 
     protected function getComponent(string $name):ApplicationComponent
     {
-        if(isset($this->application->components[$name]))
+        if(isset($this->application->components[$name])) {
             return $this->application->components[$name];
+        }
         
         throw new \InvalidArgumentException("Composant $name non défini");
         return false;

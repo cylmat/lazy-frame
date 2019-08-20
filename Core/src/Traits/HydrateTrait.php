@@ -11,7 +11,8 @@ trait HydrateTrait
     {
         foreach( $values as $col => $value )
         {
-            if(!is_string($col)) continue;
+            if(!is_string($col)) { continue;
+            }
             $setMethod = 'set'.ucfirst($col);
             $class->$setMethod($value);
         }

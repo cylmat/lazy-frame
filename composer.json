@@ -15,5 +15,11 @@
         "squizlabs/php_codesniffer": "^3.4",
         "phpmd/phpmd": "^2.7",
         "phpunit/phpunit": "^8.3"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check": "phpcs",
+        "fix": "phpcbf",
+        "md": "phpmd Core text cleancode, codesize, controversial, design, naming, unusedcode"
     }
 }

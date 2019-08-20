@@ -2,7 +2,8 @@
 
 namespace Core\Component;
 
-if(!defined('APP_ROOT')) die("Application non définie");
+if(!defined('APP_ROOT')) { die("Application non définie");
+}
 
 use Core\Contract\ApplicationInterface;
 use Core\Contract\ApplicationComponentInterface;
@@ -61,7 +62,7 @@ class Application extends ApplicationComponent implements ApplicationInterface
         new \Core\Component\Controller();
 
         $database = \Core\Component\Database::getInstance();
-        $database->setDataAccess( new \PDO('mysql:host=localhost;dbname=game','root','root') );
+        $database->setDataAccess(new \PDO('mysql:host=localhost;dbname=game', 'root', 'root'));
         $this->append($database, 'Database');
 
         $this->inject($this);

@@ -38,8 +38,9 @@ class Router extends ApplicationComponent implements RouterInterface
         $get = $this->httpRequest->get();
 
         if(isset($get[$key])) {
-            if(ctype_alpha($get[$key]))
+            if(ctype_alpha($get[$key])) {
                 return $get[$key];
+            }
         }
         return $defaultKey;
     }
