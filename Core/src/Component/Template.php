@@ -31,7 +31,7 @@ class Template extends ApplicationComponent implements TemplateInterface
             throw new \InvalidArgumentException("Le fichier $viewPath n'existe pas.");
         }
         
-        $this->vue = $viewPath;
+        $this->_vue = $viewPath;
     }
 
     
@@ -58,10 +58,14 @@ class Template extends ApplicationComponent implements TemplateInterface
         extract($params);
 
         //vue
-        ob_start();
-        include $this->_vue;
-        $content = ob_get_contents();
-        ob_end_clean();
+        if (file_exists($this->_vue)) {
+            ob_start();
+            include $this->_vue;
+            $content = ob_get_contents();
+            ob_end_clean();
+        } else {
+            throw new \RunTimeException("File doesn't exists "{$this->_vue});
+        }
 
         //template
         if (file_exists($this->_template)) {

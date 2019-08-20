@@ -20,7 +20,7 @@ class Config
             return false;
         }
 
-        self::$config = parse_ini_file($configPath, true);
+        self::$_config = parse_ini_file($configPath, true);
         return new self;
     }
 
