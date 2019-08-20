@@ -9,8 +9,8 @@ class PersoController extends Controller
     function indexAction() 
     { 
         //$persoRepo = new PersoRepository( $this->getComponent('Database') );
-        $list = $persoRepo->list();
-
+        //$list = $persoRepo->list();
+$list=[];
         $this->renderVue([
             'hector'=>'boulliez',
             'list'=>$list

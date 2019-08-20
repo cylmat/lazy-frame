@@ -1,4 +1,4 @@
 
-    bidule sur l'inddex
+    alphone daudet
 
-<?= $hector ?>
+<?= '' ?>

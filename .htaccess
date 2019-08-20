@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^(\w+)?\/?(\w+)?\/?(\w+)?$ /index.php?module=$1&ctrl=$2&action=$3 [L]
