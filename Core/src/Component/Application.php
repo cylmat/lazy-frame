@@ -65,7 +65,7 @@ class Application extends ApplicationComponent implements ApplicationInterface
         new \Core\Component\Controller();
 
         $database = \Core\Component\Database::getInstance();
-        $database->setDataAccess(new \PDO('mysql:host=localhost;dbname=game', 'root', 'root'));
+        $database->setDataAccess(new \PDO('mysql:host=localhost', 'root', 'root'));
         $this->_append($database, 'Database');
 
         $this->inject($this);

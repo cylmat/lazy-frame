@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">>
+<html lang="fr">
     <head>
         <title>Lazy-Frame framework</title>
         <link rel="stylesheet" type="text/css" href="public/assets/css/style.css"/>

@@ -34,13 +34,18 @@ final class Autoload
     public function load(string $class)
     {
         foreach (self::$_pathsDir as $path) {
-            $src_before = $path . '/src/'.$class.'.php';
+            $src_before = $path . DIR_SEP.'src'.DIR_SEP.$class.'.php';
+
+            $src_before = str_replace('\\','/',$src_before);
             if (file_exists($src_before)) {
                 include_once $src_before;
             }
 
             //Core files (/Core/src/...)
-            $src_core = $path . '/' . preg_replace('/\w*(\/|\\\)/', 'src/', $class, 1).'.php';
+            $src_core = $path . DIR_SEP . preg_replace('/\w*(\/|\\\)/', 'src'.DIR_SEP, $class, 1).'.php';
+            
+            //for MacOs bug
+            $src_core = str_replace('\\','/',$src_core);
             if (file_exists($src_core)) {
                 include_once $src_core;
             }

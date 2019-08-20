@@ -35,7 +35,7 @@ class Controller extends ApplicationComponent implements ControllerInterface
     {
         $this->_template = new Template();
 
-        $controllerName = explode(DIR_SEP, static::class);
+        $controllerName = explode('\\', static::class);
         if (count($controllerName)!==3) {
             throw new \Exception("Controller name invalid");
             return false;
