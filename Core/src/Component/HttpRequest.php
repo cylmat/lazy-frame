@@ -27,13 +27,8 @@ class HttpRequest extends ApplicationComponent implements HttpRequestInterface
 {
     private $get, $post;
 
-    function __construct()
-    {
-        
-    }
-
     /**
-     * TODO secure
+     * TODO secure with FILTER
      */
     function get()
     {
@@ -41,7 +36,7 @@ class HttpRequest extends ApplicationComponent implements HttpRequestInterface
     }
 
     /**
-     * TODO secure
+     * TODO secure with FILTER
      */
     function post()
     {
@@ -49,7 +44,7 @@ class HttpRequest extends ApplicationComponent implements HttpRequestInterface
     }
 
     /**
-     * TODO secure
+     * TODO secure with FILTER
      */
     function cookie()
     {

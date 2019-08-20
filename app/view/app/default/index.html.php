@@ -1,0 +1,3 @@
+ l'inddex
+
+<?= 'r' ?>coin

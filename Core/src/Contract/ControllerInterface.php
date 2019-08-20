@@ -4,8 +4,7 @@ namespace Core\Contract;
 
 interface ControllerInterface
 {
-    function render(string $html);
-    function getPage();
+    function renderRaw(string $html);
     function renderVue(array $params=[]);
     function setView(string $actionName);
 }

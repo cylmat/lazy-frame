@@ -1,9 +1,11 @@
 <?php
 
 define('ENV', 'DEV');
-define('APP_ROOT', __DIR__.'/');
+define('DIR_SEP', DIRECTORY_SEPARATOR);
+define('APP_ROOT', __DIR__.DIR_SEP);
 
 use Core\Component\Application;
+use Core\Tool\Config;
 
 if('DEV'===ENV) {
     error_reporting(-1); //E_ALL
@@ -15,4 +17,4 @@ if('DEV'===ENV) {
 
 require APP_ROOT.'app/autoload.php';
 
-Application::run();
+Application::run( Config::get(APP_ROOT.'app/config/config.ini') );

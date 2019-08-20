@@ -5,6 +5,11 @@ namespace Core\Component;
 use Core\Component\ApplicationComponent;
 use Core\Contract\TemplateInterface;
 
+/**
+ * Template
+ * 
+ * Called by Controller
+ */
 class Template extends ApplicationComponent implements TemplateInterface
 {
     private $template;
@@ -14,9 +19,9 @@ class Template extends ApplicationComponent implements TemplateInterface
     function setTemplate(string $templatePath)
     {
         if(!file_exists($templatePath))
-            throw new \InvalidArgumentException("Le fichier $templatePath n'existe pas.");
-
-        $this->template = $templatePath;
+            $this->template = '';
+        else
+            $this->template = $templatePath;
     }
 
     function setVue(string $viewPath)
@@ -27,11 +32,26 @@ class Template extends ApplicationComponent implements TemplateInterface
         $this->vue = $viewPath;
     }
 
+    
+    function setRawContent(string $content)
+    {
+        $this->generatedPage = html_entity_decode($$content, ENT_COMPAT, 'UTF-8');
+    }
+
+    /**
+     * Rendered page
+     */
+    function getPage(array $params=[]): string
+    {
+        $this->parse($params);
+        return $this->generatedPage;
+    }
+
     /**
      * Parse a Html string
      * Insert params into
      */
-    function parse(array $params)
+    private function parse(array $params)
     {
         extract($params);
 
@@ -42,23 +62,12 @@ class Template extends ApplicationComponent implements TemplateInterface
         ob_end_clean();
 
         //template
-        ob_start();
-        include $this->template;
-        $page = ob_get_contents();
-        ob_end_clean();
-        $this->generatedPage = $page;
-    }
-
-    function setRawContent(string $content)
-    {
-        $this->generatedPage = html_entity_decode($$content, ENT_COMPAT, 'UTF-8');
-    }
-
-    /**
-     * Rendered page
-     */
-    function getPage()
-    {
-        return $this->generatedPage;
+        if(file_exists($this->template)) {
+            ob_start();
+            include $this->template;
+            $content = ob_get_contents();
+            ob_end_clean();
+        }
+        $this->generatedPage = $content;
     }
 }

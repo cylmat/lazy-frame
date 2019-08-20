@@ -14,10 +14,17 @@ class ApplicationComponent implements ApplicationComponentInterface
         $this->application = $app;
     }
 
-    function getComponent(string $name)
+    function __get(string $componentName): ApplicationComponent
+    {
+        return $this->getComponent(ucfirst($componentName));
+    }
+
+    protected function getComponent(string $name):ApplicationComponent
     {
         if(isset($this->application->components[$name]))
             return $this->application->components[$name];
+        
+        throw new \InvalidArgumentException("Composant $name non défini");
         return false;
     }
 }
