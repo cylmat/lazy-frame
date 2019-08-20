@@ -6,7 +6,7 @@
     </head>
     <body>
         <header>
-            <h1>Lazy - Frame</h1>
+            <h1>LazyFrame~</h1>
         </header>
         <main>
             <?= $content ?>
