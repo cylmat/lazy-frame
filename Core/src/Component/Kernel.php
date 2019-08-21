@@ -21,13 +21,14 @@ class Kernel extends ApplicationComponent
         //ctrl
         $controller = ucfirst($module) . '\\Controller\\'.ucfirst($controller.'Controller');
 
-        $ctrl = new $controller($this->container);
+        $ctrl = new $controller( $this->container );
         $act = strtolower($action).'Action';
 
         //action
         if (method_exists($ctrl, $act)) {
             $ctrl->setView($action);
             $ctrl->$act();
+            
             $httpResponse = $this->container->get('HttpResponse');
             $httpResponse->setPage($ctrl->getPage());
             return $httpResponse;

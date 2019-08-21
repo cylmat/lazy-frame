@@ -18,12 +18,12 @@ class Router extends ApplicationComponent implements RouterInterface
     const DEFAULT_ACTION = 'index';
     const DEFAULT_MODULE = 'app';
 
-    function getModule( ): string
+    function getModule(): string
     {
         return $this->_getKey(self::KEY_MODULE, self::DEFAULT_MODULE);
     }
 
-    function getController( ): string
+    function getController(): string
     {
         return $this->_getKey(self::KEY_CTRL, self::DEFAULT_CTRL);
     }

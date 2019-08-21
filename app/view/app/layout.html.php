@@ -12,6 +12,7 @@
             <?= $content ?>
         </main>
         <footer>
+            <div><?= $debug ?></div>
             <div>Temps de chargement : 1.3ms</div>
             <div>Module [App] - Controller [Default] - Action [Index]</div>
             <div>Mémoire utilisée: 56ko</div>

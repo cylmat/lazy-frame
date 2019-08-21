@@ -14,6 +14,8 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
      */
     private $_page;
 
+    private $_pageParams = [];
+
     function redirect(string $url, int $code)
     {
 
@@ -29,6 +31,11 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
         $this->_page = $page;
     }
 
+    function setPageParams(array $params)
+    {
+        $this->_pageParams = $params;
+    }
+
     function setSession()
     {
 
@@ -40,7 +47,10 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
     function send(): ?string
     {
         if (is_string($this->_page)) {
-            echo ( $this->_page );
+            extract($this->_pageParams);
+            ob_start();
+            echo $this->_page;
+            ob_end_flush();
         }
         return null; 
     }

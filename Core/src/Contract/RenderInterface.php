@@ -2,7 +2,7 @@
 
 namespace Core\Contract;
 
-interface TemplateInterface
+interface RenderInterface
 {
     function setTemplate(string $templatePath);
     function setVue(string $viewPath);

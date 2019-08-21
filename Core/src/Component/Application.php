@@ -60,11 +60,7 @@ class Application
             $this->container->get('Router')->getController(), 
             $this->container->get('Router')->getAction()
         );
+        $httpResponse->setPageParams(['debug'=>'testing']);
         $httpResponse->send();
     }
-
-    /*private function _append($name)
-    {
-        $this->container->append($name);
-    }*/
 }

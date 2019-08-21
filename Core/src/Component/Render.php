@@ -3,7 +3,7 @@
 namespace Core\Component;
 
 use Core\Component\ApplicationComponent;
-use Core\Contract\TemplateInterface;
+use Core\Contract\RenderInterface;
 
 /**
  * Template
@@ -15,6 +15,7 @@ class Template extends ApplicationComponent implements TemplateInterface
     private $_template;
     private $_vue;
     private $_generatedPage='';
+    private $_params=[];
 
     function setTemplate(string $templatePath)
     {
@@ -49,13 +50,19 @@ class Template extends ApplicationComponent implements TemplateInterface
         return $this->_generatedPage;
     }
 
+    function addParams(array $params)
+    {
+        $this->_params = $this->_params + $params;
+    }
+
     /**
      * Parse a Html string
      * Insert params into
      */
     private function _parse(array $params)
     {
-        extract($params);
+        $this->addParams($params);
+        extract($this->_params);
 
         //vue
         if (file_exists($this->_vue)) {
