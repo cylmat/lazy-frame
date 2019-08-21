@@ -16,7 +16,23 @@ class Container
      * 
      * @var array
      */
-    private $_collection;
+    private $_collection=[];
+
+    /**
+     * Load all components
+     */
+    public function loadCollection(): bool
+    {
+        $dir = new \DirectoryIterator(__DIR__);
+        $loaded = false;
+        foreach ($dir as $file) {
+            if ($file->isFile()) {
+                $this->append(str_replace('.php','',$file->getFilename()));
+                $loaded = true;
+            }
+        }
+        return $loaded;
+    }
 
     /**
      * Get lazy-loaded components

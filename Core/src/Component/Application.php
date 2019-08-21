@@ -17,9 +17,7 @@ class Application
     /**
      * Internal config
      */
-    protected static $coreConfig = [
-
-    ];
+    protected static $coreConfig = [];
 
     /**
      * Public configuration
@@ -49,13 +47,7 @@ class Application
     private function _loadComponents()
     {
         $this->container = new \Core\Component\Container();
-
-        $this->_append('HttpRequest');
-        $this->_append('HttpResponse');
-        $this->_append('Kernel');
-        $this->_append('Router');
-        $this->_append('Template');
-        $this->_append('Database');
+        $this->container->loadCollection();
     }
 
     /**
@@ -71,8 +63,8 @@ class Application
         $httpResponse->send();
     }
 
-    private function _append($name)
+    /*private function _append($name)
     {
         $this->container->append($name);
-    }
+    }*/
 }
