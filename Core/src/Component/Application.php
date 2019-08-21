@@ -9,10 +9,10 @@ if (!defined('APP_ROOT')) {
 use Core\Contract\ApplicationInterface;
 use Core\Contract\ApplicationComponentInterface;
 use Core\Traits\SingletonTrait;
-use Core\Component\ApplicationComponent;
+//use Core\Component\ApplicationComponent;
 use Core\Tool\Config;
 
-class Application extends ApplicationComponent implements ApplicationInterface
+class Application 
 {
     use SingletonTrait;
 
@@ -28,7 +28,7 @@ class Application extends ApplicationComponent implements ApplicationInterface
      * 
      * @var array
      */
-    public $components=[];
+    //public $components=[];
 
     /**
      * Public configuration
@@ -57,8 +57,16 @@ class Application extends ApplicationComponent implements ApplicationInterface
      */
     private function _loadComponents()
     {
-        $this->_append(new \Core\Component\HttpRequest(), 'HttpRequest');
-        $this->_append(new \Core\Component\HttpResponse(), 'HttpResponse');
+        $this->_append('HttpRequest');
+        $this->_append('HttpResponse');
+        $this->_append('Kernel');
+        $this->_append('Router');
+        $this->_append('Template');
+        $this->_append('Controller');
+        $this->_append('Database');
+
+        //$this->_append(new \Core\Component\HttpRequest(), 'HttpRequest');
+       /* $this->_append(new \Core\Component\HttpResponse(), 'HttpResponse');
         $this->_append(new \Core\Component\Kernel(), 'Kernel');
         $this->_append(new \Core\Component\Router(), 'Router');
         $this->_append(new \Core\Component\Template(), 'Template');
@@ -66,9 +74,7 @@ class Application extends ApplicationComponent implements ApplicationInterface
 
         $database = \Core\Component\Database::getInstance();
         $database->setDataAccess(new \PDO('mysql:host=localhost', 'root', 'root'));
-        $this->_append($database, 'Database');
-
-        $this->inject($this);
+        $this->_append($database, 'Database');*/
     }
 
     /**
@@ -85,11 +91,22 @@ class Application extends ApplicationComponent implements ApplicationInterface
     }
 
     /**
-     *  TODO: collection
+     *  TODO: lazy
      */
-    private function _append(ApplicationComponentInterface $component, $name)
+    /*private function _appendText(string $componentName)
+    {
+        $this->components[$componentName] = true;
+    }*/
+
+    /*private function _append(ApplicationComponentInterface $component, $name)
     {
         $component->inject($this);
         $this->components[$name] = $component;
+        $this->$name = $component;
+    }*/
+
+    private function append($name)
+    {
+
     }
 }

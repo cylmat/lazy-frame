@@ -2,10 +2,10 @@
 
 namespace Core\Contract;
 
-use Core\Contract\ApplicationInterface;
+use Core\Component\Application;
 use Core\Contract\ApplicationComponentInterface;
 
 interface ApplicationComponentInterface
 {
-    function inject(ApplicationInterface $app);
+    function inject(Application &$app);
 }
