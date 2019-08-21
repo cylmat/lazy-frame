@@ -14,6 +14,11 @@ class Controller extends ApplicationComponent implements ControllerInterface
      */
     private $_template = null; 
 
+    function __construct(&$container)
+    {
+        $this->container = $container;
+    }
+
     /**
      * Render pur html string
      */

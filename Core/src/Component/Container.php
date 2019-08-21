@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Tool;
+namespace Core\Component;
 
 /**
  * Class Container
@@ -16,21 +16,22 @@ class Container
      * 
      * @var array
      */
-    private $collection;
+    private $_collection;
 
     /**
      * Get lazy-loaded components
      */
-    function get($name): ?ApplicationComponent
+    public function get($name): ?ApplicationComponent
     {
         //exists in collection
-        if (array_key_exists($name, $this->collection)) {
+        if (array_key_exists($name, $this->_collection)) {
             //not instantiated
-            if ($name===($this->collection[$name])) {
+            if ($name===($this->_collection[$name])) {
                 $component = self::COMPOSANT_DIR.$name;
-                $this->collection[$name] = new $component();
+                $this->_collection[$name] = new $component();
+                $this->_collection[$name]->setContainer($this);
             } 
-            return $this->collection[$name];
+            return $this->_collection[$name];
 
         } else { //append a valid composant
             if($this->append($name)) {
@@ -44,33 +45,18 @@ class Container
     /**
      * Ajoute un nouveau composant valide
      */
-    function append($name): bool
+    public function append($name): bool
     {
         $component = self::COMPOSANT_DIR.$name;
         if (class_exists($component)) {
             //not exists yet
-            if(!isset($this->collection[$name])) {
-                $this->collection[$name] = $name;
+            if(!isset($this->_collection[$name])) {
+                $this->_collection[$name] = $name;
                 return true;
             }
         } else {
             throw new \InvalidArgumentException("Composant $name non défini");
             return false;
         }
-    }
-
-    protected function getComponent(string $name): ApplicationComponent
-    {
-        if (isset($this->application->components[$name])) {
-            $component = $this->application->components[$name];
-            if (is_string($name)) {
-                $component = '\\Core\\Component\\'.$name;
-                return new $component();
-        } else {
-            throw new \InvalidArgumentException("Composant $name non défini");
-            return false;
-        }
-
-        return $this->application->components[$name];
     }
 }
