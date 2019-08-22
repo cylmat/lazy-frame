@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Component;
 
@@ -47,7 +47,7 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
      */
     function send()
     {
-        $this->_page->addParams( $this->_pageParams );
+        $this->_page->addParams($this->_pageParams);
         echo $this->_page->render();
     }
 }

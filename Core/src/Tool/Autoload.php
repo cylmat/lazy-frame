@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Tool;
 
@@ -36,7 +36,7 @@ final class Autoload
         foreach (self::$_pathsDir as $path) {
             $src_before = $path . DIR_SEP.'src'.DIR_SEP.$class.'.php';
 
-            $src_before = str_replace('\\','/',$src_before);
+            $src_before = str_replace('\\', '/', $src_before);
             if (file_exists($src_before)) {
                 include_once $src_before;
             }
@@ -45,7 +45,7 @@ final class Autoload
             $src_core = $path . DIR_SEP . preg_replace('/\w*(\/|\\\)/', 'src'.DIR_SEP, $class, 1).'.php';
             
             //for MacOs bug
-            $src_core = str_replace('\\','/',$src_core);
+            $src_core = str_replace('\\', '/', $src_core);
             if (file_exists($src_core)) {
                 include_once $src_core;
             }

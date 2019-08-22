@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Component;
 
@@ -7,7 +7,7 @@ namespace Core\Component;
  * 
  * Contient les diférents Components de l'application
  */
-class Container 
+class Container
 {
     const COMPOSANT_DIR = '\\Core\\Component\\';
 
@@ -27,7 +27,7 @@ class Container
         $loaded = false;
         foreach ($dir as $file) {
             if ($file->isFile()) {
-                $this->append(str_replace('.php','',$file->getFilename()));
+                $this->append(str_replace('.php', '', $file->getFilename()));
                 $loaded = true;
             }
         }
@@ -50,7 +50,7 @@ class Container
             return $this->_collection[$name];
 
         } else { //append a valid composant
-            if($this->append($name)) {
+            if ($this->append($name)) {
                 return $this->get($name);
             }
         }
@@ -66,7 +66,7 @@ class Container
         $component = self::COMPOSANT_DIR.$name;
         if (class_exists($component)) {
             //not exists yet
-            if(!isset($this->_collection[$name])) {
+            if (!isset($this->_collection[$name])) {
                 $this->_collection[$name] = $name;
                 return true;
             }

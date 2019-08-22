@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Component;
 
@@ -21,7 +21,7 @@ class Kernel extends ApplicationComponent
         //ctrl
         $controller = ucfirst($module) . '\\Controller\\'.ucfirst($controller.'Controller');
 
-        $ctrl = new $controller( $this->container );
+        $ctrl = new $controller($this->container);
         $act = strtolower($action).'Action';
 
         //action
@@ -30,7 +30,7 @@ class Kernel extends ApplicationComponent
             $ctrl->$act();
             
             $httpResponse = $this->container->get('HttpResponse');
-            $httpResponse->setPage( $ctrl->getPage() );
+            $httpResponse->setPage($ctrl->getPage());
             return $httpResponse;
         } else { 
             throw new \BadMethodCallException("L'action '$action' de $module\\$controller n'exists pas");

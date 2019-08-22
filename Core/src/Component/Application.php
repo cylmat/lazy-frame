@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Component;
 
@@ -10,7 +10,7 @@ use Core\Contract\ApplicationComponentInterface;
 use Core\Traits\SingletonTrait;
 use Core\Tool\Config;
 
-class Application 
+class Application
 {
     use SingletonTrait;
 
