@@ -30,7 +30,7 @@ class Kernel extends ApplicationComponent
             $ctrl->$act();
             
             $httpResponse = $this->container->get('HttpResponse');
-            $httpResponse->setPage($ctrl->getPage());
+            $httpResponse->setPage( $ctrl->getPage() );
             return $httpResponse;
         } else { 
             throw new \BadMethodCallException("L'action '$action' de $module\\$controller n'exists pas");

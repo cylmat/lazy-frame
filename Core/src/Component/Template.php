@@ -3,7 +3,7 @@
 namespace Core\Component;
 
 use Core\Component\ApplicationComponent;
-use Core\Contract\RenderInterface;
+use Core\Contract\TemplateInterface;
 
 /**
  * Template
@@ -14,7 +14,7 @@ class Template extends ApplicationComponent implements TemplateInterface
 {
     private $_template;
     private $_vue;
-    private $_generatedPage='';
+    private $_renderPage='';
     private $_params=[];
 
     function setTemplate(string $templatePath)
@@ -35,19 +35,19 @@ class Template extends ApplicationComponent implements TemplateInterface
         $this->_vue = $viewPath;
     }
 
-    
     function setRawContent(string $content)
     {
-        $this->_generatedPage = html_entity_decode($$content, ENT_COMPAT, 'UTF-8');
+        $this->_renderPage = html_entity_decode($content, ENT_COMPAT, 'UTF-8');
     }
 
     /**
      * Rendered page
      */
-    function getPage(array $params=[]): string
+    function render(array $params=[]): string
     {
-        $this->_parse($params);
-        return $this->_generatedPage;
+        $this->addParams($params);
+        $this->_parse();
+        return $this->_renderPage;
     }
 
     function addParams(array $params)
@@ -59,9 +59,8 @@ class Template extends ApplicationComponent implements TemplateInterface
      * Parse a Html string
      * Insert params into
      */
-    private function _parse(array $params)
+    private function _parse()
     {
-        $this->addParams($params);
         extract($this->_params);
 
         //vue
@@ -81,6 +80,6 @@ class Template extends ApplicationComponent implements TemplateInterface
             $content = ob_get_contents();
             ob_end_clean();
         }
-        $this->_generatedPage = $content;
+        $this->_renderPage = $content;
     }
 }

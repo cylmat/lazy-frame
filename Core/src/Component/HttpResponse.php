@@ -4,13 +4,14 @@ namespace Core\Component;
 
 use Core\Component\ApplicationComponent;
 use Core\Contract\HttpResponseInterface;
+use Core\Contract\TemplateInterface;
 
 class HttpResponse extends ApplicationComponent implements HttpResponseInterface
 {
     /**
      * Html page to be displayed
      * 
-     * @var string
+     * @var Template
      */
     private $_page;
 
@@ -26,7 +27,7 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
 
     }
 
-    function setPage(string $page)
+    function setPage(TemplateInterface $page)
     {
         $this->_page = $page;
     }
@@ -42,16 +43,11 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
     }
 
     /**
-     * Print page response
+     * Print page response to output
      */
-    function send(): ?string
+    function send()
     {
-        if (is_string($this->_page)) {
-            extract($this->_pageParams);
-            ob_start();
-            echo $this->_page;
-            ob_end_flush();
-        }
-        return null; 
+        $this->_page->addParams( $this->_pageParams );
+        echo $this->_page->render();
     }
 }

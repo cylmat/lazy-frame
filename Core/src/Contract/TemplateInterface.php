@@ -2,10 +2,11 @@
 
 namespace Core\Contract;
 
-interface RenderInterface
+interface TemplateInterface
 {
     function setTemplate(string $templatePath);
     function setVue(string $viewPath);
     function setRawContent(string $content);
-    function getPage(array $params=[]): string;
+    function addParams(array $params);
+    function render(array $params=[]): string;
 }

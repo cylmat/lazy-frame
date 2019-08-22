@@ -4,7 +4,7 @@ namespace Core\Component;
 
 use Core\Contract\ControllerInterface;
 use Core\Component\ApplicationComponent;
-use Core\Component\Page;
+use Core\Component\Template;
 use Core\Component\Application;
 
 class Controller extends ApplicationComponent implements ControllerInterface
@@ -25,15 +25,16 @@ class Controller extends ApplicationComponent implements ControllerInterface
     function renderRaw(string $html): Template
     {
         $this->_template->setRawContent($html); 
-        return $this->_template->getPage();
+        return $this->_template;
     }
 
     /**
      * Render template
      */
-    function renderVue(array $params=[])
+    function renderVue(array $params=[]): Template
     {
-        return $this->_template->getPage($params);
+        $this->_template->addParams($params);
+        return $this->_template;
     }
 
     function setView(string $actionName)
@@ -59,8 +60,8 @@ class Controller extends ApplicationComponent implements ControllerInterface
         $this->_template->setVue($viewPath);
     }
 
-    function getPage():string
+    function getPage(): Template
     {
-        return $this->_template->getPage();
+        return $this->_template;
     }
 }
