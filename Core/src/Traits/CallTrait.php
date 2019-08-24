@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Traits;
 
@@ -9,9 +9,11 @@ trait CallTrait
 {
     public function __call($name, $arg=[])
     {
-        if(!isset($arg[0])) $arg[0] = '';
-            if(method_exists($this->db,$name))
-                return $this->db->$name(...$arg);
+        if (method_exists($this, $name)) {
+            return $this->$name(...$arg);
+        }
+        
+        throw new \InvalidArgumentException("La méthode $name n'existe pas");
         return false;
     }
 }

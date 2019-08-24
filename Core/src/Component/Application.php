@@ -1,105 +1,65 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Component;
 
-if(!defined('APP_ROOT')) die("Application non définie");
+if (!defined('APP_ROOT')) {
+    die("Application non définie");
+}
 
-use Core\Contract\ApplicationInterface;
-use Core\Traits\SingletonTrait;
 use Core\Contract\ApplicationComponentInterface;
+use Core\Traits\SingletonTrait;
+use Core\Tool\Config;
 
-class Application implements ApplicationInterface
+class Application
 {
     use SingletonTrait;
 
     /**
-     * 
+     * Internal config
      */
-    public $components=[];
+    protected static $coreConfig = [];
 
+    /**
+     * Public configuration
+     * 
+     * @var Config
+     */
     public static $config;
 
     private function __construct()
     {
-        $this->loadComponents();
-        $this->runningApplication();
+        $this->_loadComponents();
+        $this->_runningKernelApplication();
     }
 
     /**
-     * 
+     * Launch application
      */
-    static function run()
+    public static function run( Config $config )
     {
+        self::$config = $config;
         self::getInstance();
     }
 
     /**
-     * 
+     * Load components globally in Lazyloading
      */
-    public function getComponent(string $name)
+    private function _loadComponents()
     {
-        if(isset($this->components[$name]))
-            return $this->components[$name];
-        return false;
-    }
-
-    private function loadComponents()
-    {
-        self::$config = parse_ini_file(APP_ROOT.'app/config/config.ini', true);
-
-        $this->append(new \Core\Component\HttpRequest(), 'HttpRequest');
-        $this->append(new \Core\Component\HttpResponse(), 'HttpResponse');
-        $this->append(new \Core\Component\Router(), 'Router');
-        $this->append(new \Core\Component\Template(), 'Template');
-        new \Core\Component\Controller();
-
-        $database = \Core\Component\Database::getInstance();
-        $database->setDataAccess( new \PDO('mysql:host=localhost;dbname=game','root','root') );
-        $this->append($database, 'Database');
+        $this->container = new \Core\Component\Container();
+        $this->container->loadCollection();
     }
 
     /**
-     * RUNNING APPLICATION
+     * RUNNING Kernel Application
      */
-    private function runningApplication()
+    private function _runningKernelApplication()
     {
-        $router = $this->getComponent('Router');
-        $this->action($router->getController(), $router->getAction());
-    }
-
-    /**
-     * Launch Controller
-     */
-    private function action(string $controller, string $action)
-    {
-        //ctrl
-        $controller = 'Controller\\'.ucfirst($controller.'Controller');
-
-        $ctrl = new $controller;
-        $this->append($ctrl, $controller);
-        $act = strtolower($action).'Action';
-
-        //action
-        if(method_exists($ctrl, $act)) {
-            $ctrl->setView($action);
-            $ctrl->$act();
-            $vue = $ctrl->getPage();
-        } else 
-            throw new \BadMethodCallException("L'action '$action' de $controller n'exists pas");
-
-        if(is_string($vue))
-            if(!empty($vue))
-                echo $vue;
-        return null;
-    }
-
-    /**
-     *  todo: collection
-     * 
-     */
-    private function append(ApplicationComponentInterface $component, $name)
-    {
-        $component->inject($this);
-        $this->components[$name] = $component;
+        $httpResponse = $this->container->get('Kernel')->getResponse(
+            $this->container->get('Router')->getModule(),
+            $this->container->get('Router')->getController(), 
+            $this->container->get('Router')->getAction()
+        );
+        $httpResponse->send();
     }
 }

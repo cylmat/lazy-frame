@@ -3,10 +3,10 @@
         <title>Voici</title>
     </head>
     <body>
-        <h1>Bonfjour a tous</h1>
+        <h1>Gamemaster</h1>
 
         <?= $content ?>
 
-        <div>...et merci à tous</div>
+        <div>..vila</div>
     </body>
 </html>

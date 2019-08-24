@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Contract;
 
-interface ApplicationComponentInterface 
+interface ApplicationComponentInterface
 {
-    function inject(ApplicationInterface $app);
+    public function setContainer(&$container);
 }

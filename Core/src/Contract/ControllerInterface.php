@@ -1,8 +1,10 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Contract;
 
 interface ControllerInterface
 {
-    function render(string $html);
+    function renderRaw(string $html);
+    function renderVue(array $params=[]);
+    function setView(string $actionName);
 }

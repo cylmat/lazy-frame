@@ -1,55 +1,27 @@
 {
-    "name": "camillemaurice/wordpress",
-    "description": "wordpress testing",
+    "name": "cyril/framework",
+    "description": "Framework de d\u0000veloppement en projet d'\u0000tude",
     "type": "project",
-    "require": {
-    },
+    "license": "gpl2",
     "authors": [
         {
-            "name": "freeonisland",
-            "email": "freeonisland@yahoo.fr"
+            "name": "cyril matte,",
+            "email": "cyrilmatte.pro@gmail.com"
         }
     ],
-    "config":{
-        "sort-package":true	
-    },
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "require": {
-        "anahkiasen/html-object":"^1.4",
-	    "anahkiasen/underscore-php":"2",
-	    "league/plates":"^3.3",
-	    "propel/propel":"~2.0@dev"
-    },
+    "require": {},
     "require-dev": {
-        "brain/monkey": "^2.2",
-        "overtrue/php-lint": "^1.1",
-        "peridot-php/peridot": "^1",
-        "phpunit/phpunit-skeleton-generator": "*",
-        "wp-coding-standards/wpcs": "^2.0"
-    },
-    "autoload": {
-        "psr-4": { 
-            "App\\":"app/"
-        }
+        "squizlabs/php_codesniffer": "^3.4",
+        "phpmd/phpmd": "^2.7",
+        "phpunit/phpunit": "^8.3",
+        "slevomat/coding-standard": "^5.0"
     },
     "scripts": {
-        "phpcs_e": "phpcs --config-set ignore_errors_on_exit 1",
-        "phpcs_w": "phpcs --config-set ignore_warnings_on_exit 1",
-	    "phpcs_c": "phpcs --config-set colors 1",
-        "phpcs_i": "phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs",
-        
-        "phpcs":   "phpcs --standard=wordpress wp-content/plugins/myplug",
-        "phpcs-u": "phpcs --standard=wordpress wp-content/mu-plugins",
-        "phpmd":   "phpmd wp-content/plugins/myplug text cleancode,codesize,controversial,design,naming,unusedcode --ignore-violations-on-exit",
-        "phpmd-u": "phpmd wp-content/mu-plugins text cleancode,codesize,controversial,design,naming,unusedcode --ignore-violations-on-exit",
-        "phpunit": "bash config/phpunit.sh",
-        
-        "test": ["@phpcs", "@phpcs-u", "@phpmd", "@phpmd-u"]
-    },
-        "scripts-descriptions": {
-        "phpcs-file": "phpcs app --report=junit --report-file=var/php_reports/phpcs_report.xml",
-        "phpmd-file": "phpmd app xml cleancode,codesize,controversial,design,naming,unusedcode --reportfile var/php_reports/phpmd_report.xml --ignore-violations-on-exit",        
-	    "phpunit-bash": "phpunit tests --bootstrap vendor/autoload.php --log-junit var/php_reports/phpunit_report.xml"
+        "test": "phpunit",
+        "cs": "phpcs",
+        "fix": "phpcbf",
+        "md": "phpmd Core text cleancode, codesize, controversial, design, naming, unusedcode",
+        "check-style": "phpcs -p --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 Core"
     }
 }

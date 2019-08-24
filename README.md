@@ -1,5 +1,13 @@
-Lazy-frame
-==========
-Framework complet 'from scratch' en php 
+# Micro-framework PHP complet pour projet d'étude
 
-Inspiré du framework Symfony, développement des composants permettant de faire fonctionner un framework de a à z.
+## Répertoires
+- app/
+Fichiers de configuration
+Ressources du site (templates, fichiers de style, scripts)
+
+- Core/
+Fichiers systèmes du framework
+Contient les sources principales du framework (Interfaces, Router, HttpRequest...)
+
+- src/
+Fichiers nécessaires à l'utilisation (controllers, repositories, entitées)

@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Component;
 
-use Core\Abstracts\ApplicationComponent;
+use Core\Component\ApplicationComponent;
 use Core\Contract\HttpRequestInterface;
 
 /*
@@ -25,15 +25,10 @@ use Core\Contract\HttpRequestInterface;
 */
 class HttpRequest extends ApplicationComponent implements HttpRequestInterface
 {
-    private $get, $post;
-
-    function __construct()
-    {
-        
-    }
+    private $_get, $_post;
 
     /**
-     * TODO secure
+     * TODO secure with FILTER
      */
     function get()
     {
@@ -41,7 +36,7 @@ class HttpRequest extends ApplicationComponent implements HttpRequestInterface
     }
 
     /**
-     * TODO secure
+     * TODO secure with FILTER
      */
     function post()
     {
@@ -49,14 +44,14 @@ class HttpRequest extends ApplicationComponent implements HttpRequestInterface
     }
 
     /**
-     * TODO secure
+     * TODO secure with FILTER
      */
     function cookie()
     {
         return $_COOKIE;
     }
 
-    function getRequestUri():string
+    function getRequestUri(): string
     {
         //REQUEST_URI
         return self::gettingValue('REQUEST_URI');
@@ -73,7 +68,7 @@ class HttpRequest extends ApplicationComponent implements HttpRequestInterface
         return self::gettingValue('SERVER_PROTOCOL');
     }
 
-    function getMethod():string
+    function getMethod(): string
     {
         //REQUEST_METHOD
         return self::gettingValue('REQUEST_METHOD');
@@ -100,8 +95,9 @@ class HttpRequest extends ApplicationComponent implements HttpRequestInterface
      */
     static function gettingValue($val)
     {
-        if(isset($_SERVER[$val]))
+        if (isset($_SERVER[$val])) {
             return filter_input(INPUT_SERVER, $val, FILTER_SANITIZE_STRING);
+        }
         return $val;
     }
 }

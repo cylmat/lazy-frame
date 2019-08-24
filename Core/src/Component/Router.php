@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Component;
 
-use Core\Abstracts\ApplicationComponent;
+use Core\Component\ApplicationComponent;
 use Core\Contract\RouterInterface;
 
 /**
@@ -12,32 +12,36 @@ class Router extends ApplicationComponent implements RouterInterface
 {
     const KEY_CTRL = 'ctrl';
     const KEY_ACTION = 'action';
+    const KEY_MODULE = 'module';
 
     const DEFAULT_CTRL = 'default';
     const DEFAULT_ACTION = 'index';
+    const DEFAULT_MODULE = 'app';
 
-    function getController( ): string
+    function getModule(): string
     {
-        $get = $this->getComponent('HttpRequest')->get();
+        return $this->_getKey(self::KEY_MODULE, self::DEFAULT_MODULE);
+    }
 
-        if(isset($get[self::KEY_CTRL]) && ctype_alpha($get[self::KEY_CTRL])) {
-            return $get[self::KEY_CTRL];
-        } else {
-            return self::DEFAULT_CTRL;
-        }
-        return false;
+    function getController(): string
+    {
+        return $this->_getKey(self::KEY_CTRL, self::DEFAULT_CTRL);
     }
 
     function getAction(): string
     {
-        $get = $this->getComponent('HttpRequest')->get();
+        return $this->_getKey(self::KEY_ACTION, self::DEFAULT_ACTION);
+    }
 
-        if(isset($get[self::KEY_ACTION])) {
-            if(ctype_alpha($get[self::KEY_ACTION]))
-                return $get[self::KEY_ACTION];
-        } else {
-            return self::DEFAULT_ACTION;
+    private function _getKey(string $key, string $defaultKey)
+    {
+        $get = $this->container->get('HttpRequest')->get();
+
+        if (isset($get[$key])) {
+            if (ctype_alpha($get[$key])) {
+                return $get[$key];
+            }
         }
-        return self::DEFAULT_ACTION;
+        return $defaultKey;
     }
 }

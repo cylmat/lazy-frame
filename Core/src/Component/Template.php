@@ -1,64 +1,85 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Component;
 
-use Core\Abstracts\ApplicationComponent;
+use Core\Component\ApplicationComponent;
 use Core\Contract\TemplateInterface;
 
+/**
+ * Template
+ * 
+ * Called by Controller
+ */
 class Template extends ApplicationComponent implements TemplateInterface
 {
-    private $template;
-    private $vue;
-    private $generatedPage='';
+    private $_template;
+    private $_vue;
+    private $_renderPage='';
+    private $_params=[];
 
     function setTemplate(string $templatePath)
     {
-        if(!file_exists($templatePath))
-            throw new \InvalidArgumentException("Le fichier $templatePath n'existe pas.");
-
-        $this->template = $templatePath;
+        if (!file_exists($templatePath)) {
+            $this->_template = '';
+        } else {
+            $this->_template = $templatePath;
+        }
     }
 
     function setVue(string $viewPath)
     {
-        if(!file_exists($viewPath))
+        if (!file_exists($viewPath)) {
             throw new \InvalidArgumentException("Le fichier $viewPath n'existe pas.");
+        }
         
-        $this->vue = $viewPath;
+        $this->_vue = $viewPath;
+    }
+
+    function setRawContent(string $content)
+    {
+        $this->_renderPage = html_entity_decode($content, ENT_COMPAT, 'UTF-8');
+    }
+
+    /**
+     * Rendered page
+     */
+    function render(array $params=[]): string
+    {
+        $this->addParams($params);
+        $this->_parse();
+        return $this->_renderPage;
+    }
+
+    function addParams(array $params)
+    {
+        $this->_params = $this->_params + $params;
     }
 
     /**
      * Parse a Html string
      * Insert params into
      */
-    function parse(array $params)
+    private function _parse()
     {
-        extract($params);
+        extract($this->_params);
 
         //vue
-        ob_start();
-        include $this->vue;
-        $content = ob_get_contents();
-        ob_end_clean();
+        if (file_exists($this->_vue)) {
+            ob_start();
+            include $this->_vue;
+            $content = ob_get_contents();
+            ob_end_clean();
+        } else {
+            throw new \RunTimeException("File doesn't exists "{$this->_vue});
+        }
 
         //template
-        ob_start();
-        include $this->template;
-        $page = ob_get_contents();
-        ob_end_clean();
-        $this->generatedPage = $page;
-    }
-
-    function setRawContent(string $content)
-    {
-        $this->generatedPage = html_entity_decode($$content, ENT_COMPAT, 'UTF-8');
-    }
-
-    /**
-     * Rendered page
-     */
-    function getPage()
-    {
-        return $this->generatedPage;
+        if (file_exists($this->_template)) {
+            ob_start();
+            include $this->_template;
+            $content = ob_get_contents();
+            ob_end_clean();
+        }
+        $this->_renderPage = $content;
     }
 }

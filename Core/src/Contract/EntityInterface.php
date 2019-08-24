@@ -2,7 +2,7 @@
 
 namespace Core\Contract;
 
-interface DatabaseInterface
+interface EntityInterface
 {
     
 }

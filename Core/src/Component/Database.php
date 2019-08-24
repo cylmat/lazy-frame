@@ -1,40 +1,43 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Core\Component;
 
-use Core\Abstracts\ApplicationComponent;
+use Core\Component\ApplicationComponent;
 use Core\Contract\DatabaseInterface;
+use Core\Traits\SingletonTrait;
 
 class Database extends ApplicationComponent
 {
-    private static $instance=null;
-    private $db=null;
+    use SingletonTrait;
 
-    private function __construct() {}
-    private function __clone() {}
+    private $_db=null;
 
-    static function getInstance()
+    private function __construct()
     {
-        if(null === self::$instance)
-            self::$instance = new self;
-        return self::$instance;
     }
 
+    private function __clone()
+    {
+    }
 
     /**
      * $manager: PDO, mysqli, etc...
      */
     function setDataAccess( $dataAccess )
     {
-        if($this->db = $dataAccess) 
+        if ($this->_db = $dataAccess) {
             return true;
+        }
     }
 
     function __call($name, $arg=[])
     {
-        if(!isset($arg[0])) $arg[0] = '';
-        if(method_exists($this->db,$name))
-            return $this->db->$name(...$arg);
+        if (!isset($arg[0])) {
+            $arg[0] = '';
+        }
+        if (method_exists($this->_db, $name)) {
+            return $this->_db->$name(...$arg);
+        }
         return false;
     }
 }

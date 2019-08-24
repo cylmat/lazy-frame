@@ -1,34 +1,17 @@
 <?php
 
+namespace Repository;
+
+use Core\Component\Repository;
+
 class PersoRepository extends Repository
 {   
     /**
-     * Create
-     */
-    public function create( PersoEntity $perso ): bool
-    {
-        $sql = "
-INSERT INTO ".$this->DB_NAME." (name, life, class, level, `force`)
-VALUES (:name, :life, :class, :level, :force);
-";
-
-        $smt = $this->db->prepare($sql);
-        $params = [
-            ':name'=>$perso->getName(),
-            ':life'=>$perso->getLife(),
-            ':class'=>$perso->getClass(),
-            ':level'=>$perso->getLevel(),
-            ':force'=>$perso->getForce()
-        ];
-        return $smt->execute($params);
-    }
-
-    /**
      * Update
      */
-    public function update(PersoEntity $perso, array $newParams): bool
+    /*public function update(EntityInterface $entity, array $newParams): bool
     {
-        $this->hydrate($perso, $newParams);
+        $this->hydrate($entity, $newParams);
         
         $sql = "
 UPDATE ".$this->DB_NAME." 
@@ -47,12 +30,12 @@ WHERE id=:id;
         ];
         
         return $smt->execute($params);
-    }
+    }*/
 
     /**
      * Get
      */
-    public function getFromId( int $id ): ?object
+    /*public function getFromId( int $id ): ?object
     {
         $sql = "SELECT * FROM ".$this->DB_NAME." WHERE id={$id}";
         $smt = $this->db->prepare($sql);
@@ -64,12 +47,12 @@ WHERE id=:id;
             return $perso;
         }
         return null;
-    }
+    }*/
 
     /**
      * List
      */
-    public function list(): ?array
+    /*public function list(): ?array
     {
         $sql = "SELECT * FROM ".$this->DB_NAME."";
         $smt = $this->db->prepare($sql);
@@ -87,12 +70,12 @@ WHERE id=:id;
             return $list;
         }
         return null;
-    }
+    }*/
 
     /**
      * Delete
      */
-    public function deleteId($id): bool
+    /*public function deleteId($id): bool
     {
         $delete_sql = "
 DELETE FROM ".$this->DB_NAME." 
@@ -102,7 +85,7 @@ WHERE id=:id
         $smt = $this->db->prepare($delete_sql);
         $smt->bindValue(':id', $id, PDO::PARAM_INT);
         return $smt->execute();
-    }
+    }*/
     
     /**
      * Create Database
