@@ -16,7 +16,6 @@ final class Autoload
     {
         self::$_pathsDir[] = preg_replace('/\/$/', '', $pathDir);
         self::_register();
-        print_r(self::$_pathsDir);
     }
 
     /**
