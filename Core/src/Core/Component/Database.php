@@ -8,16 +8,11 @@ use Core\Traits\SingletonTrait;
 
 class Database extends ApplicationComponent
 {
-    use SingletonTrait;
+    private $db;
 
-    private $_db=null;
-
-    private function __construct()
+    public function __construct($dataAccess)
     {
-    }
-
-    private function __clone()
-    {
+       $this->setDataAccess( $dataAccess );
     }
 
     /**

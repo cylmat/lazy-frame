@@ -17,6 +17,11 @@
         "phpunit/phpunit": "^8.3",
         "slevomat/coding-standard": "^5.0"
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Core\\": "./Core/src/"
+        }
+    },
     "scripts": {
         "test": "phpunit",
         "cs": "phpcs",

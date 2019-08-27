@@ -1,5 +1,5 @@
 <?php
 
-include __DIR__.'/../Core/src/autoload.php';
+include __DIR__.'/../Core/src/Core/autoload.php';
 
-new Core\Tool\Autoload(APP_ROOT);
+Core\Tool\Autoload::addPath(APP_ROOT); //for src
