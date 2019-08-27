@@ -13,7 +13,7 @@ class DefaultController extends Controller
         $user = new UserEntity;
         $user->setName('Michel');
        
-        $userRepo = new UserRepository( $this->getComponent('Database') );
+        $userRepo = new UserRepository( $this->container->get('Database') );
         $r = $userRepo->create($user);
 
         $this->renderVue();
