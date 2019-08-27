@@ -47,6 +47,7 @@ class Application
     private function _loadComponents()
     {
         $this->container = new \Core\Component\Container();
+        $this->container->load('Database', [new \PDO('mysql:host=localhost;dbname=frame','root','root')]);
         $this->container->loadCollection();
     }
 

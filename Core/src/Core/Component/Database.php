@@ -12,13 +12,13 @@ class Database extends ApplicationComponent
 
     public function __construct($dataAccess)
     {
-       $this->setDataAccess( $dataAccess );
+       $this->setDataAccess( $dataAccess);
     }
 
     /**
      * $manager: PDO, mysqli, etc...
      */
-    function setDataAccess( $dataAccess )
+    function setDataAccess( $dataAccess)
     {
         if ($this->_db = $dataAccess) {
             return true;

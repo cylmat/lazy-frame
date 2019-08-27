@@ -12,6 +12,11 @@ class Container
     const COMPOSANT_DIR = '\\Core\\Component\\';
 
     /**
+     * Composants directory
+     */
+    const DIRECTORY = __DIR__;
+
+    /**
      * Collection of ApplicationComponent;
      * 
      * @var array
@@ -19,25 +24,23 @@ class Container
     private $_collection=[];
 
     /**
-     * Load specific with constructor parameters
+     * Demande le chargement d'un élément
      */
-    /*public function appendNewSpecific($name, $constructParams): bool
+    public function load(string $name, array $constructorParams=[]): bool
     {
-        if ($this->appendValid($name)) {
-            return $this->get($name);
-        }
-    }*/
+        return $this->_append($name, $constructorParams);
+    }
 
     /**
-     * Load all components
+     * Load all components with no constructors
      */
     public function loadCollection(): bool
     {
-        $dir = new \DirectoryIterator(__DIR__);
         $isLoaded = false;
+        $dir = new \DirectoryIterator(self::DIRECTORY);
         foreach ($dir as $file) {
             if ($file->isFile()) {
-                $this->_append(str_replace('.php', '', $file->getFilename()));
+                $this->_append(str_replace('.php', '', $file->getFilename()), []);
                 $isLoaded = true;
             }
         }
@@ -47,22 +50,18 @@ class Container
     /**
      * Get lazy-loaded components if exists
      */
-    public function get($name): ?ApplicationComponent
+    public function get(string $name): ?ApplicationComponent
     {
         //if exists in collection
         if (array_key_exists($name, $this->_collection)) {
-            //instantiate if not instantiated
-            if ($name===($this->_collection[$name])) {
-                //$component = self::COMPOSANT_DIR.$name;
-                $this->_create($name, $constructParams=[]); //new $component();
-                //$this->_collection[$name]->setContainer($this);
+            //if not instantiated
+            if (!is_object($this->_collection[$name])) {
+                $this->_create($name); 
             } 
+            //return object
             return $this->_collection[$name];
-
-        } else { //append a composant
-            if ($this->_append($name)) {
-                return $this->get($name);
-            }
+        } else {
+            throw new \InvalidArgumentException("Composant $name impossible à récupérer");
         }
         //no component
         return null;
@@ -72,13 +71,12 @@ class Container
      * Create a new component
      * Load specific with constructor parameters
      */
-    private function _create($name, $constructParams=[]): bool
+    private function _create(string $name): bool
     {
         $component = self::COMPOSANT_DIR.$name;
         if($this->_append($name)) {
             try {
-                //$c = new $component( ...$constructParams );
-                $this->_collection[$name] = new $component($name, ...$constructParams); //new $component();
+                $this->_collection[$name] = new $component(...$this->_collection[$name]); 
                 $this->_collection[$name]->setContainer($this);
                 return true;
             } catch(Exception $e) {
@@ -89,20 +87,20 @@ class Container
     }
 
     /** 
-     * Varifie si un component exists dans le repertoire
+     * Vérifie si un component est valide (exists dans le repertoire)
      * Si oui ajoute le composant à la liste
      */
-    private function _append($name): bool
+    private function _append(string $name, array $constructorParams=[]): bool
     {
         $component = self::COMPOSANT_DIR.$name;
         if (class_exists($component)) {
             //not exists yet
             if (!isset($this->_collection[$name])) {
-                $this->_collection[$name] = $name;
+                $this->_collection[$name] = $constructorParams;
             }
             return true;
         } else {
-            throw new \InvalidArgumentException("Composant $name non défini");
+            throw new \InvalidArgumentException("Composant $name non existant");
             return false;
         }
     }
