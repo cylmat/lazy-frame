@@ -6,8 +6,8 @@ use Core\Contract\TemplateInterface;
 
 interface HttpResponseInterface
 {
-    function redirect(string $url, int $code);
-    function setCookie(array $params);
-    function setPage(TemplateInterface $page);
-    function send();
+    function redirect(string $url, int $code): void;
+    function setCookie(array $params): void;
+    function setPage(TemplateInterface $page): void;
+    function send(): void;
 }

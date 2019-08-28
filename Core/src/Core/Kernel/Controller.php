@@ -1,28 +1,32 @@
 <?php declare(strict_types = 1);
 
-namespace Core\Component;
+namespace Core\Kernel;
 
 use Core\Contract\ControllerInterface;
-use Core\Component\ApplicationComponent;
 use Core\Component\Template;
-use Core\Component\Application;
 
-class Controller extends ApplicationComponent implements ControllerInterface
+class Controller implements ControllerInterface
 {
     /**
      * Template object
      */
     private $_template = null; 
 
-    function __construct(&$container)
+    /**
+     * Configuration
+     */
+    private $config;
+
+    public function __construct(&$container, $config)
     {
         $this->container = $container;
+        $this->config = $config;
     }
 
     /**
      * Render pur html string
      */
-    function renderRaw(string $html): Template
+    public function renderRaw(string $html): Template
     {
         $this->_template->setRawContent($html); 
         return $this->_template;
@@ -31,15 +35,15 @@ class Controller extends ApplicationComponent implements ControllerInterface
     /**
      * Render template
      */
-    function renderVue(array $params=[]): Template
+    public function renderVue(array $params=[]): Template
     {
         $this->_template->addParams($params);
         return $this->_template;
     }
 
-    function setView(string $actionName)
+    public function setView(string $actionName)
     {
-        $this->_template = new Template();
+        $this->_template = $this->container->get('Template');
 
         $controllerName = explode('\\', static::class);
         if (count($controllerName)!==3) {
@@ -47,20 +51,20 @@ class Controller extends ApplicationComponent implements ControllerInterface
             return false;
         }
 
-        $viewDir =  APP_ROOT . Application::$config->app->view_path; 
+        $viewDir =  APP_ROOT . $this->config->app->view_path; 
 
         $templatePath = $viewDir . DIR_SEP . strtolower($controllerName[0]) . 
-            DIR_SEP . Application::$config->view->layout_name . Application::$config->view->file_ext;
+            DIR_SEP . $this->config->view->layout_name . $this->config->view->file_ext;
 
         $viewPath = $viewDir . DIR_SEP . strtolower($controllerName[0]) . 
             DIR_SEP . strtolower(str_replace('Controller', '', $controllerName[2])) . 
-            DIR_SEP . $actionName . Application::$config->view->file_ext;
+            DIR_SEP . $actionName . $this->config->view->file_ext;
 
         $this->_template->setTemplate($templatePath);
         $this->_template->setVue($viewPath);
     }
 
-    function getPage(): Template
+    public function getPage(): Template
     {
         return $this->_template;
     }

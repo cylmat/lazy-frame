@@ -2,7 +2,7 @@
 
 namespace Core\Component;
 
-use Core\Component\ApplicationComponent;
+use Core\Kernel\ApplicationComponent;
 use Core\Contract\DatabaseInterface;
 use Core\Traits\SingletonTrait;
 

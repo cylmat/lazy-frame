@@ -2,17 +2,14 @@
     Bienvenue sur votre page d'accueil
 </p>
 <p class="loaded">
-    <h3>Composants chargés</h3>
+    <h3>Composants chargés (<?php echo count($loaded)." sur {$count}"; ?>)</h3>
     <ul>
-        <li>HttpRequest</li>
-        <li>HttpResponse</li>
-        <li>Controller</li>
+        <?php foreach($loaded as $item) echo "<li>$item</li>"; ?>
     </ul>
 </p>
 <p class="dispo">
-    <h3>Composants disponibles</h3>
+    <h3>Composants disponibles (<?php echo count($notLoaded)." sur {$count}"; ?>)</h3>
     <ul>
-        <li>Repository</li>
-        <li>Entity</li>
+    <?php foreach($notLoaded as $item) echo "<li>$item</li>"; ?>
     </ul>
 </p>

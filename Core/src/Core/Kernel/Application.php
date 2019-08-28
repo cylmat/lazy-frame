@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Core\Component;
+namespace Core\Kernel;
 
 if (!defined('APP_ROOT')) {
     die("Application non définie");
@@ -9,6 +9,7 @@ if (!defined('APP_ROOT')) {
 use Core\Contract\ApplicationComponentInterface;
 use Core\Traits\SingletonTrait;
 use Core\Tool\Config;
+use Core\Kernel\Container;
 
 class Application
 {
@@ -46,7 +47,7 @@ class Application
      */
     private function _loadComponents()
     {
-        $this->container = new \Core\Component\Container();
+        $this->container = new Container();
         $this->container->load('Database', [new \PDO('mysql:host=localhost;dbname=frame','root','root')]);
         $this->container->loadCollection();
     }
@@ -56,10 +57,11 @@ class Application
      */
     private function _runningKernelApplication()
     {
+        $router = $this->container->get('Router');
         $httpResponse = $this->container->get('Kernel')->getResponse(
-            $this->container->get('Router')->getModule(),
-            $this->container->get('Router')->getController(), 
-            $this->container->get('Router')->getAction()
+            $router->getModule(),
+            $router->getController(), 
+            $router->getAction()
         );
         $httpResponse->send();
     }

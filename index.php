@@ -4,7 +4,7 @@ define('ENV', 'DEV');
 define('DIR_SEP', DIRECTORY_SEPARATOR);
 define('APP_ROOT', __DIR__.DIR_SEP);
 
-use Core\Component\Application;
+use Core\Kernel\Application;
 use Core\Tool\Config;
 
 if('DEV'===ENV) {

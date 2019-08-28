@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Core\Component;
+namespace Core\Kernel;
 
 use Core\Component\Application;
 use Core\Contract\ApplicationComponentInterface;

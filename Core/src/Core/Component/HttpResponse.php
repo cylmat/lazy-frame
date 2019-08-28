@@ -2,7 +2,7 @@
 
 namespace Core\Component;
 
-use Core\Component\ApplicationComponent;
+use Core\Kernel\ApplicationComponent;
 use Core\Contract\HttpResponseInterface;
 use Core\Contract\TemplateInterface;
 
@@ -17,22 +17,22 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
 
     private $_pageParams = [];
 
-    function redirect(string $url, int $code)
+    function redirect(string $url, int $code): void
     {
 
     }
 
-    function setCookie(array $params)
+    function setCookie(array $params): void
     {
 
     }
 
-    function setPage(TemplateInterface $page)
+    function setPage(TemplateInterface $page): void
     {
         $this->_page = $page;
     }
 
-    function setPageParams(array $params)
+    function setPageParams(array $params): void
     {
         $this->_pageParams = $params;
     }
@@ -45,7 +45,7 @@ class HttpResponse extends ApplicationComponent implements HttpResponseInterface
     /**
      * Print page response to output
      */
-    function send()
+    function send(): void
     {
         $this->_page->addParams($this->_pageParams);
         echo $this->_page->render();

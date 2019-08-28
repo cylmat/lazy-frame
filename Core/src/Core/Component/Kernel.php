@@ -2,7 +2,8 @@
 
 namespace Core\Component;
 
-use Core\Component\ApplicationComponent;
+use Core\Kernel\ApplicationComponent;
+use Core\Kernel\Application;
 use Core\Component\HttpResponse;
 
 /**
@@ -15,13 +16,17 @@ class Kernel extends ApplicationComponent
 {
     /**
      * Launch Controller
+     * 
+     * @param string $module     Module name 
+     * @param string $controller Controller name
+     * @param string $action     Action name
      */
     public function getResponse(string $module, string $controller, string $action): HttpResponse
     {
         //ctrl
         $controller = ucfirst($module) . '\\Controller\\'.ucfirst($controller.'Controller');
 
-        $ctrl = new $controller($this->container);
+        $ctrl = new $controller($this->container, Application::$config);
         $act = strtolower($action).'Action';
 
         //action
@@ -30,6 +35,13 @@ class Kernel extends ApplicationComponent
             $ctrl->$act();
             
             $httpResponse = $this->container->get('HttpResponse');
+
+            // Debug
+            $httpResponse->setPageParams([
+                'count'=>$this->container->count(),
+                'loaded'=>$this->container->getLoaded(),
+                'notLoaded'=>$this->container->getNotLoaded()
+            ]);
             $httpResponse->setPage($ctrl->getPage());
             return $httpResponse;
         } else { 

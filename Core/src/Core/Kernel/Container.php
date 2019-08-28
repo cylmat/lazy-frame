@@ -1,20 +1,23 @@
 <?php declare(strict_types = 1);
 
-namespace Core\Component;
+namespace Core\Kernel;
+
+use Core\Kernel\ComponentFactory;
+use Core\Kernel\ApplicationComponent;
 
 /**
  * Class Container
  * 
  * Contient les diférents Components de l'application
  */
-class Container
+class Container implements \Countable
 {
     const COMPOSANT_DIR = '\\Core\\Component\\';
 
     /**
      * Composants directory
      */
-    const DIRECTORY = __DIR__;
+    const DIRECTORY = __DIR__.'/../Component';
 
     /**
      * Collection of ApplicationComponent;
@@ -22,6 +25,14 @@ class Container
      * @var array
      */
     private $_collection=[];
+
+    /**
+     * Count
+     */
+    public function count()
+    {
+        return count($this->_collection);
+    }
 
     /**
      * Demande le chargement d'un élément
@@ -67,6 +78,42 @@ class Container
         return null;
     }
 
+    /** 
+     * Get loaded components list
+     */
+    public function getLoaded(): array
+    {
+        $loaded = [];
+        foreach($this->_collection as $componentName => $params) {
+            if(is_object($params)) {
+                $loaded[] = $componentName;
+            }
+        }
+        return $loaded;
+    }
+
+    /**
+     * Get all not yet loaded components list
+     */
+    public function getNotLoaded(): array
+    {
+        $loaded = [];
+        foreach($this->_collection as $componentName => $params) {
+            if(!is_object($params)) {
+                $loaded[] = $componentName;
+            }
+        }
+        return $loaded;
+    }
+
+    /**
+     * Get all components list
+     */
+    public function getAll()
+    {
+        return $this->_collection;
+    }
+
     /**
      * Create a new component
      * Load specific with constructor parameters
@@ -76,7 +123,7 @@ class Container
         $component = self::COMPOSANT_DIR.$name;
         if($this->_append($name)) {
             try {
-                $this->_collection[$name] = new $component(...$this->_collection[$name]); 
+                $this->_collection[$name] = ComponentFactory::create($component, $this->_collection[$name]); 
                 $this->_collection[$name]->setContainer($this);
                 return true;
             } catch(Exception $e) {
