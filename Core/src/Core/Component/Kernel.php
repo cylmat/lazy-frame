@@ -24,9 +24,9 @@ class Kernel extends ApplicationComponent
     public function getResponse(string $module, string $controller, string $action): HttpResponse
     {
         //ctrl
-        $controller = ucfirst($module) . '\\Controller\\'.ucfirst($controller.'Controller');
+        $controller_name = ucfirst($module) . '\\Controller\\'.ucfirst($controller.'Controller');
 
-        $ctrl = new $controller($this->container, Application::$config);
+        $ctrl = new $controller_name($this->container, Application::$config);
         $act = strtolower($action).'Action';
 
         //action
@@ -40,7 +40,11 @@ class Kernel extends ApplicationComponent
             $httpResponse->setPageParams([
                 'count'=>$this->container->count(),
                 'loaded'=>$this->container->getLoaded(),
-                'notLoaded'=>$this->container->getNotLoaded()
+                'notLoaded'=>$this->container->getNotLoaded(),
+                'action'=>$action,
+                'module'=>$module,
+                'controller'=>$controller,
+                'bench'=>\Core\Tool\Bench::get()
             ]);
             $httpResponse->setPage($ctrl->getPage());
             return $httpResponse;

@@ -12,9 +12,9 @@
             <?= $content ?>
         </main>
         <footer>
-            <div>Temps de chargement : 1.3ms</div>
-            <div>Module [App] - Controller [Default] - Action [Index]</div>
-            <div>Mémoire utilisée: 56ko</div>
+            <div>Temps de chargement : <?=$bench['_FROM_START_']['time']?>ms</div>
+            <div>Module [<?=$module?>] - Controller [<?=$controller?>] - Action [<?=$action?>]</div>
+            <div>Mémoire utilisée: <?=$bench['_FROM_START_']['memory']?>ko</div>
         </footer>
     </body>
 </html>

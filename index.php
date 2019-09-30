@@ -6,6 +6,7 @@ define('APP_ROOT', __DIR__.DIR_SEP);
 
 use Core\Kernel\Application;
 use Core\Tool\Config;
+use Core\Tool\Bench;
 
 if('DEV'===ENV) {
     error_reporting(-1); //E_ALL
@@ -17,4 +18,5 @@ if('DEV'===ENV) {
 
 require APP_ROOT.'app/autoload.php';
 
+Bench::start();
 Application::run( Config::get(APP_ROOT.'app/config/config.ini') );
