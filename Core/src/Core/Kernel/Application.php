@@ -50,6 +50,7 @@ class Application
         $this->container = new Container();
         $this->container->load('Database', [new \PDO('mysql:host=localhost;dbname=frame','root','root')]);
         $this->container->loadCollection();
+
     }
 
     /**
