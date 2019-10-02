@@ -10,11 +10,7 @@ class DefaultController extends Controller
 {
     function indexAction() 
     { 
+        $data = require __DIR__.'/../Data/data.php';
         $this->renderVue();
-    }
-
-    function userAction()
-    {
-
     }
 }

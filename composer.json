@@ -17,15 +17,17 @@
         "phpunit/phpunit": "^7",
         "slevomat/coding-standard": "^5.0",
         "codeception/codeception": "^3.1",
-        "monolog/monolog": "^1.24"
+        "monolog/monolog": "^1.24",
+        "fzaninotto/faker": "^1.8"
     },
-    "autoload": {
+    "autoload-dev": {
         "psr-4": {
             "Core\\": "./Core/src/Core/"
         }
     },
     "scripts": {
-        "test": "phpunit --colors=always --verbose",
+        "test_core": "phpunit --colors=always --verbose --bootstrap app/autoload.php Core/tests",
+        "test": "phpunit --colors=always --verbose --bootstrap app/autoload.php tests",
         "cs": "phpcs",
         "fix": "phpcbf",
         "md": "phpmd Core text cleancode, codesize, controversial, design, naming, unusedcode",

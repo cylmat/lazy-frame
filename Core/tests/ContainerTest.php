@@ -1,10 +1,11 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
-use Core\Component\Container;
+namespace Core;
+
+use Core\Kernel\Container;
 use Core\Contract\ApplicationComponentInterface;
 
-class ContainerTest extends TestCase
+class ContainerTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp(): void
     {
@@ -21,7 +22,7 @@ class ContainerTest extends TestCase
         );
         
         //false
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $container->load('WrongComponent');
     }
 
@@ -30,7 +31,7 @@ class ContainerTest extends TestCase
         $container = new Container;
         $container->load('Database',[]);
 
-        $this->expectException(ArgumentCountError::class);
+        $this->expectException(\ArgumentCountError::class);
         $container->get('Database');
     }
 }

@@ -6,6 +6,4 @@
 /node_modules
 /var
 /vendor
-
-#game inside
-app/view/game
+/skip
