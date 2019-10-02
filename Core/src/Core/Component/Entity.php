@@ -4,8 +4,9 @@ namespace Core\Component;
 
 use Core\Contract\EntityInterface;
 use Core\Traits\CallTrait;
+use Core\Kernel\ApplicationComponent;
 
-class Entity implements EntityInterface
+class Entity extends ApplicationComponent implements EntityInterface
 {
     use CallTrait;
 

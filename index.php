@@ -18,5 +18,5 @@ if('DEV'===ENV) {
 
 require APP_ROOT.'app/autoload.php';
 
-Bench::start();
+//Bench::start();
 Application::run( Config::get(APP_ROOT.'app/config/config.ini') );

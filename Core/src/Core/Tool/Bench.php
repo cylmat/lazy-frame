@@ -29,8 +29,10 @@ class Bench
 
     static function stop($id=0): void
     {
+        if(!isset(self::$timers[$id])) return; //not exist
+        
         //already stopped
-        if(isset(self::$total[$id]['time'])) return; 
+        if(isset(self::$total[$id]['time'])) return; //exist
 
         self::$total[$id]['time'] = (microtime(true) - (float)self::$timers[$id]) * 1000;
         self::$total[$id]['time'] = round(self::$total[$id]['time'], 2);
@@ -44,6 +46,8 @@ class Bench
      */
     static function get($id=0): array
     {
+        if(!isset(self::$timers[$id])) return []; 
+
         self::stop($id);
         self::stop('_FROM_START_');
         $total[$id] = self::$total[$id];

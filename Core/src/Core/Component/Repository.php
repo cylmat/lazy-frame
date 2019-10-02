@@ -6,8 +6,9 @@ use Core\Contract\RepositoryInterface;
 use Core\Traits\HydrateTrait;
 use Core\Component\Database;
 use Core\Contract\EntityInterface;
+use Core\Kernel\ApplicationComponent;
 
-class Repository implements RepositoryInterface
+class Repository extends ApplicationComponent implements RepositoryInterface
 {
     use HydrateTrait;
 
